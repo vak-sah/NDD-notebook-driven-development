@@ -72,9 +72,12 @@ environment quirk, a manual step or a dead end → `PLAYBOOK.md`; where the proj
 `STATE.md`; what a module does or how to change it safely → its docstring. The test is simply
 whether the next session would have to ask the same question again.
 
-1. **Propose** the next feature, ordered from repo state + reference. One line on why now.
-2. **Frame** it: purpose, 1–2 alternatives, your pick, the tradeoff. Skip for routine plumbing.
-3. **Wait for `go`** only where §3 says ask. `go` = the user's answer to your proposal.
+1. **Take the next item** from `STATE.md` §4 and say in one line what it is and why it's next.
+   The queue is standing authorization — don't re-propose work the user already ordered.
+2. **Frame it** only when the decision would be expensive to reverse: purpose, 1–2 alternatives,
+   your pick, the tradeoff. Routine plumbing gets nothing.
+3. **Ask only where §3 says ask** — otherwise proceed. `go` answers a question you actually
+   asked; it is not a gate every step has to pass through.
 4. **Implement.** Docstrings always land with the code, wherever it lives. Anything already in
    `src/` gets its tests in the same change, not later. Formal test *files* for notebook code
    wait for the extraction PR (§6) — but run the cheap checks yourself first: does the notebook
@@ -93,7 +96,11 @@ whether the next session would have to ask the same question again.
    `README.md` only when the layout or pipeline actually changed — during exploration that
    normally means at extraction (§6), not every step.
 
-One feature at a time. Finish it, or park it explicitly in `STATE.md`.
+**Then keep going.** Take the next queue item rather than stopping to check in — unless it
+builds on something the user hasn't verified yet, or §3 says ask. One session landing three
+items and handing over one good check beats three sessions landing one each.
+
+One feature at a time *within* a step. Finish it, or park it explicitly in `STATE.md`.
 
 ---
 
@@ -105,9 +112,13 @@ One feature at a time. Finish it, or park it explicitly in `STATE.md`.
 - Merging a PR once its CI is green
 - Routine mechanics: formatting, lint config, `.gitignore`, small file moves
 - Updating `STATE.md`, `README.md`, `PLAYBOOK.md`
+- **Taking the next item off the `STATE.md` §4 queue**, and moving to the one after it
+- Choosing between implementations that are cheap to swap later — pick, note why, move on
+- Reverting your own unverified step when its check fails
 
 **Ask first, then act on the answer.** One question, with your recommendation.
-- Which feature is next, when more than one order is defensible
+- **Deviating from the queue** — reordering it, inserting something that isn't on it, or
+  dropping an item. Doing what is already next needs no permission
 - A library, service or data format that would be costly to swap later
 - A change to the public shape of an existing feature
 - Deleting work, force-pushing, rewriting history
@@ -240,7 +251,9 @@ The user is an amateur in most fields and verifies slower than you produce. Opti
 - **Not everything is theirs to check.** Unit tests, lint and CI are yours — run them, report
   the result as one line under **Done**.
 - **Verify** carries at most one item, and only if a human must judge it: behaviour, output
-  quality, visuals, a design call. Otherwise write "Verify: nothing".
+  quality, visuals, a design call. Otherwise write "Verify: nothing". If several steps landed in
+  one session, still hand over one check — the one most likely to catch a problem — not one per
+  step.
 - When there is one, prefer **visual and immediate** — a cell to run, a plot, a printed table.
 - Say exactly what a **pass** and a **fail** look like.
 - A long verification slog is a signal the step may be too big — say so and offer to split.
@@ -255,6 +268,7 @@ Compartmentalize. Never mix these four.
 ```
 ## Done          what changed. informative only, no action needed.
 ## Needs you     decisions, blockers, ambiguities. numbered, each with your recommendation.
+##               empty is the normal case — say "nothing" and move on.
 ## Verify        the one check to run, and what a pass looks like.
 ## Next          proposed next step, one line of why.
 ```

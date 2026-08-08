@@ -48,6 +48,13 @@ Ask these three together, in one message, and stop:
 If an answer is vague, ask **one** follow-up. Not three. A vague Goal that gets sharpened in
 week two is normal and costs less than an interrogation on day one.
 
+**Then check the shape fits.** This repo is a Colab notebook over data, extracting to `src/`.
+If the answers describe something whose centre of gravity is elsewhere — a web app, a mobile
+app, a service — say so before writing anything down, and name the shape that *would* work here
+(what the notebook produces, what consumes it). The user may want to proceed anyway; that's
+their call to make with the mismatch visible. Naming it now costs a paragraph. Discovering it at
+Step 5 costs the whole queue.
+
 ## Step 2 — References
 
 > Are there repos, papers, sites or products you want this to follow? Links, and roughly what
@@ -57,6 +64,12 @@ Zero, one or several. For each one given: read it **once**, now, and write what 
 into `PLAYBOOK.md` § *Reference notes* — the specific ideas, structures or approaches, and what
 you're deliberately *not* taking. Those notes are the point; re-reading a big reference every
 session is a tax the repo exists to avoid.
+
+**If you can't actually reach it** — no network, blocked domain, paywall — you may still write
+what you know, but label it in `PLAYBOOK.md` as written from prior familiarity rather than a
+live read, record the block under *Gotchas*, and say so in your report. An unread reference must
+never look verified. Where it matters, make "verify this from a notebook cell" the first queue
+item instead of asserting it now.
 
 ## Step 3 — Environment and paths
 
@@ -68,6 +81,9 @@ session is a tax the repo exists to avoid.
 > - **Any credentials needed?** An API key or token — name it, don't paste it. It goes in Colab
 >   Secrets or a Drive file, never in the repo.
 
+Give a concrete default for each, and say that **`go` accepts them all** — a user without strong
+opinions should be able to finish the interview in one word.
+
 ## Step 4 — Write it down
 
 Now do all of this without asking again:
@@ -75,8 +91,8 @@ Now do all of this without asking again:
 - **`STATE.md` §1** — replace the whole Goal section with theirs, plus the references. This is
   the only time you rewrite the Goal.
 - **`README.md`** — the title and the one-liner under it.
-- **Repo identity**, using the `owner/repo` from Step 0 — the README Colab badge, the two URLs
-  in `PLAYBOOK.md` § *Colab <-> GitHub round trip*, and `REPO_URL` in the notebook config cell.
+- **Repo identity**, using the `owner/repo` from Step 0 — the README Colab badge, and `REPO_URL`
+  in the notebook config cell. Those are the only two.
 - **`DRIVE_ROOT`** in the notebook config cell — the folder from Step 3.
 - **`PLAYBOOK.md`** — reference notes from Step 2; the secret's *name* and location from Step 3.
 - **`README.md`** — delete the *Start* section. It has served its purpose.
@@ -95,6 +111,12 @@ Show it and say plainly that it's a proposal and reordering is expected. Then st
 ## Step 6 — Finish
 
 Delete this file. Commit everything from Steps 4 and 5 together, push, and open a PR.
+
+If the push or PR is **refused** — auth, permissions, an app not installed — don't retry blindly.
+Commit locally, record in `STATE.md` §3 exactly what landed and what didn't, and report the
+refusal verbatim under **Needs you**. A permission refusal needs the user, not another attempt.
+Say plainly that an uncommitted-to-remote container can be reclaimed, so it's worth resolving
+before the session ends.
 
 Report in the normal format (`AGENTS.md` §9). Under **Verify**, give them the one check that
 matters: open the notebook badge and run top to bottom, confirming it's now pointed at their

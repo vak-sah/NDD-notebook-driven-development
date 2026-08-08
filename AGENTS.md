@@ -152,7 +152,7 @@ built (§6), calls into `src/` for what's settled, and visual output.
   so test output never piles up in the notebook. Run output is stripped on push by CI, so it
   never reaches git either (`PLAYBOOK.md`).
 - Cells run top-to-bottom on a fresh runtime. No hidden state, no out-of-order dependencies.
-- The user edits the notebook in Colab and commits with **Save in GitHub** (`PLAYBOOK.md`),
+- The user edits the notebook in Colab and commits with **Save in GitHub** (`README.md`),
   usually after your step has landed — default values, personal touches. They save before
   saying `go`, so the notebook in the repo is the current one. Work from it as-is.
 

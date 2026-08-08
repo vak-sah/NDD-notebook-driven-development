@@ -17,13 +17,9 @@ References:
 ## 2. Done
 <!-- EVERY merged step, oldest first, numbered, one line each. complete but brief.
      scan this to spot anything missed. detail lives in git log. -->
-1. `command_center.ipynb` — setup (mount Drive, clone repo, `sys.path`, deps), config cell
-   (Drive root + derived paths, alternatives recorded), pipeline cell
-2. Repo skeleton — `src/pipeline/`, `tests/`, `pyproject.toml` so `src/` imports without install
-3. End-to-end stub — text file in, records through untouched, text file out; in `README.md`
-   § Pipeline
-4. CI — `pytest -q` on every push and PR
-5. `README.md` § *Make it yours* — the four one-line edits that de-template a clone
+1. _nothing yet_
+<!-- The template's own build history is deliberately not here — it's in `git log`. This list
+     belongs to your project, so the first entry you write is your first real step. -->
 
 ## 3. In progress
 <!-- at most one. branch name + where it stopped -->

@@ -11,7 +11,12 @@ extract them to `src/` once they're settled, and keep the repo small enough to u
 
 <!-- The agent deletes this section during onboarding — see START_HERE.md, Step 4. -->
 
-**Use this template → open an agent session on the new repo → say hello.**
+**Use this template → open an agent session on _the new repo_ → say hello.**
+
+The session has to be on your copy, not on this page's repo. *Use this template* copies the
+files into a fresh repo with its own history and never writes back here, so the template can't
+be damaged by starting a project — and an agent that finds itself running in the template
+stops rather than onboarding it.
 
 That is the whole procedure. `START_HERE.md` has the agent interview you — what the project is
 for, what goes in and out, any references, which Drive folder, any credentials — then write the

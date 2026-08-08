@@ -23,6 +23,19 @@ Before the first question, gather these silently. Asking for any of them is a bu
 | Default branch | `git symbolic-ref refs/remotes/origin/HEAD`, or `main` |
 | Suggested project name | the repo name |
 
+**Then check you're in the right place.** If `owner/repo` is
+`vak-sah/NDD-notebook-driven-development`, this *is* the template — not a copy of it. Stop
+immediately, run nothing from Steps 1–6, and say so:
+
+> This is the template repository itself, so onboarding here would consume it. Create your own
+> copy first — **Use this template → Create a new repository** — then open a session on that
+> repo and say hello. The template stays untouched; GitHub copies the files and never writes
+> back to the source.
+
+Onboarding is destructive by design: it rewrites the Goal, repoints every URL, and deletes this
+file. Doing that to the template destroys it for everyone who clones it later. Any other
+`owner/repo` means you're in a copy — carry on to Step 1.
+
 ## Step 1 — Purpose
 
 Ask these three together, in one message, and stop:

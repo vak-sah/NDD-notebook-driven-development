@@ -6,17 +6,14 @@
 Project-specific paths, quirks, solved problems and dead ends.
 If the user corrects the same thing twice, it belongs here.
 
-## Drive layout
-- Drive root: `/content/drive/MyDrive/NDD/`   <- set once in the notebook config cell
-- Data:       `<root>/data/`
-- Outputs:    `<root>/outputs/`
-- Secrets:    <Colab Secrets key name, or `<root>/secrets/<file>`>
-
 ## Manual one-time setup
 <!-- exact path, exact filename, exact format. once done, never asked again -->
+<!-- Drive paths are NOT listed here — they live in the notebook config cell and nowhere
+     else, so there is nothing to keep in sync. -->
 - [ ] Colab: **Edit > Notebook settings > Omit code cell output when saving this notebook** —
       keeps test/run output out of the repo. Set once per notebook.
-- [ ] Create the Drive root above and place any secret file there by hand.
+- [ ] Secrets: <Colab Secrets key name, or the Drive path> — placed by hand, never in git.
+      The config cell creates the Drive folders itself; nothing to make by hand.
 
 ## Colab <-> GitHub round trip
 - Open:   the badge in `README.md`, or
@@ -33,8 +30,10 @@ If the user corrects the same thing twice, it belongs here.
 - Save before saying `go`, so the agent starts from your latest version.
 
 ## Run / setup
-- Colab bootstrap:
-- Test command:
+- Colab bootstrap: open the badge, run top to bottom. The setup cell mounts Drive, clones the
+  repo to `/content/repo` and puts `src/` on `sys.path`; the config cell makes the Drive folders.
+- Test command: `pytest -q` from the repo root. Needs no Drive, no network, no GPU — same
+  command in CI, a terminal, or a Colab cell.
 
 ## Reference notes
 <!-- what we're taking from each reference. written once, on first read. -->

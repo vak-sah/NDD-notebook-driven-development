@@ -81,8 +81,11 @@ whether the next session would have to ask the same question again.
    still parse, does the module import, does the function return what you claim on one small
    input. The user's run should fail on a question of judgement, never on a typo you could have
    caught in seconds.
-5. **Verify** — the fastest possible proof it works (§8).
-6. **Land** — merge once CI is green.
+5. **Land** — merge once CI is green. This comes *before* verification on purpose: the user
+   checks by running the notebook, which loads the default branch, so a step has to land before
+   it can be checked at all (§8).
+6. **Verify** — hand over the one check that matters (§8). If it fails, the undo is a **revert
+   PR**, not a fix stacked on top.
 7. **Update `STATE.md` when the project actually moved** — a step landed, was reverted, got
    parked, or the queue changed order. *Not* for a bugfix, a CI fix, a doc correction or a
    second attempt inside a step that's already listed; `git log` carries those, and `STATE.md`
@@ -227,6 +230,13 @@ The user is an amateur in most fields and verifies slower than you produce. Opti
   proves itself by executing a cell is verified by the user, always. Never write "verified" or
   "confirmed working" about a cell you didn't execute — say what you expect it to print and let
   them check. Getting this wrong is worse than a bug, because it burns their trust in **Done**.
+- **Verification happens after merge.** The notebook loads the default branch, so a step has to
+  land before the user can run it. **Merged therefore means "ready to check", not "known to
+  work"** — say which one you mean, every time. If the check fails, the undo is a **revert PR**:
+  one commit back to a known-good default branch, with the failed attempt still in `git log`.
+  Fixing forward on top of something unverified is how two unverified changes become one
+  unverifiable mess. (A user who wants to preview first can point `REPO_BRANCH` at the branch and
+  open the notebook from it — useful occasionally, not the loop to design around.)
 - **Not everything is theirs to check.** Unit tests, lint and CI are yours — run them, report
   the result as one line under **Done**.
 - **Verify** carries at most one item, and only if a human must judge it: behaviour, output

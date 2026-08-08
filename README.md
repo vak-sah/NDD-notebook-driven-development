@@ -55,14 +55,5 @@ root set in the notebook's config cell, which is the only place that path appear
 
 <!-- input → each stage → output. one line per stage, naming the module that owns it. -->
 
-1. **Input** — a text file under `DATA_DIR` · `src/pipeline/stub.py`
-2. **Passthrough** — records through untouched; the seam a real stage replaces · `src/pipeline/stub.py`
-3. **Output** — one record per line under `OUTPUTS_DIR` · `src/pipeline/stub.py`
-
-That is a stub, not a feature: it exists so a fresh clone can prove notebook → `src/` → `tests/`
-→ CI is wired up before building anything, and so the first real stage has something to replace.
-Delete it once it has one.
-
-## Working on it
-
-Feature lifecycle, autonomy rules and reporting format: `AGENTS.md`.
+Nothing real yet — `src/pipeline/stub.py` is a passthrough that proves the wiring works. The
+first stage replaces it.

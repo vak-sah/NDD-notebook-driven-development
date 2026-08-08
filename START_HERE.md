@@ -110,17 +110,29 @@ Show it and say plainly that it's a proposal and reordering is expected. Then st
 
 ## Step 6 — Finish
 
-Delete this file. Commit everything from Steps 4 and 5 together, push, and open a PR.
+Delete this file. Commit everything from Steps 4 and 5 as one commit, and push it **to the
+default branch** — not to a feature branch with a PR. Onboarding is initialization, not a
+reviewable change: there is nothing to review, and a copy whose onboarding sits unmerged on a
+branch is indistinguishable from a copy that was never onboarded at all.
 
-If the push or PR is **refused** — auth, permissions, an app not installed — don't retry blindly.
-Commit locally, record in `STATE.md` §3 exactly what landed and what didn't, and report the
-refusal verbatim under **Needs you**. A permission refusal needs the user, not another attempt.
-Say plainly that an uncommitted-to-remote container can be reclaimed, so it's worth resolving
-before the session ends.
+If your environment forces branch-based work, push the branch and open the PR, then say in the
+report — plainly, not as a footnote — that **onboarding is not complete until that PR is merged**.
 
-Report in the normal format (`AGENTS.md` §9). Under **Verify**, give them the one check that
-matters: open the notebook badge and run top to bottom, confirming it's now pointed at their
-repo and their Drive folder.
+**Then confirm it landed.** Re-read the default branch and check `START_HERE.md` is actually gone
+from it. A local commit is not evidence; never report success on one.
+
+If the push is **refused** — auth, permissions, an app not installed — don't retry blindly and
+don't quietly settle for a local commit. Stop and report, under **Needs you**:
+
+- the refusal message, verbatim;
+- that the repo is **unchanged**, so `REPO_URL` still points at the template;
+- that the notebook must not be run until this is fixed — it would clone and run the template's
+  code, and look perfectly healthy doing it;
+- that this container is ephemeral, so the commit dies with the session.
+
+Report in the normal format (`AGENTS.md` §9). Under **Verify**: open the notebook badge and run
+top to bottom, confirming the setup cell prints their repo and their Drive folder, and prints no
+onboarding warning.
 
 From the next session on, `AGENTS.md` §2 *Every session* is the loop. This file is gone and
 never read again.

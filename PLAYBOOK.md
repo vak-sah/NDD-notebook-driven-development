@@ -22,8 +22,10 @@ If the user corrects the same thing twice, it belongs here.
 - Open:   the badge in `README.md`, or
           https://colab.research.google.com/github/vak-sah/NDD-notebook-driven-development/blob/main/command_center.ipynb
 - Auth:   no key, no token. First save pops up **"Authorize googlecolab"** (OAuth) — click it.
-          It can expire and re-prompt; that's normal. If the repo is ever made private, go to
+          It can expire and re-prompt; that's normal.
+          **This repo is private**, so the plain grant is not enough: go to
           colab.research.google.com/github once, tick **Include Private Repos**, authorize.
+          Do this before anything else — without it Colab can't see the repo at all.
 - Save:   the **"Save in GitHub to keep changes"** button (top bar) -> repo
           `vak-sah/NDD-notebook-driven-development`, branch `main`, path
           `command_center.ipynb`, write a commit message -> OK.
@@ -45,7 +47,13 @@ If the user corrects the same thing twice, it belongs here.
 <!-- repo layout and pipeline order live in README.md, not here -->
 
 ## Gotchas
-- 
+- **Colab `404 Not Found` on `api.github.com/repos/.../contents/?ref=main`** — this is the
+  private-repo grant missing, not a broken branch or a missing file. GitHub answers 404 (never
+  403) for a private repo the token can't see, so the message is misleading. Fix: tick
+  **Include Private Repos** at colab.research.google.com/github (see *Auth* above). Verified
+  with an authorized token the same call returns the repo root fine.
+- The Colab badge / `blob/main/command_center.ipynb` link 404s until that notebook exists on
+  `main` — a *different* 404 from the one above, and the reason it's `STATE.md` §4 item 1.
 
 ## Known-bad approaches
 <!-- tried, failed, don't retry -->

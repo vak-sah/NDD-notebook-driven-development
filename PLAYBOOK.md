@@ -28,6 +28,13 @@ If the user corrects the same thing twice, it belongs here.
           Do this before anything else; without it Colab can't see the repo at all.
           *Use this template* defaults the new repo to private, so a fresh clone normally
           needs this step. Making the repo public removes the need for it entirely.
+- Token:  **not needed** for opening or saving the notebook — that's the OAuth grant above,
+          and it covers private repos once *Include Private Repos* is ticked.
+          A token *is* needed the moment a **cell** does `git clone` of a private repo (to put
+          `src/` on `sys.path`): that's plain git, which the browser's OAuth session doesn't
+          reach. Then, and only then: a fine-grained PAT with *Contents: read*, stored as a
+          Colab Secret named `GITHUB_TOKEN` and read with `google.colab.userdata`. Never
+          pasted into a cell, never committed. A public repo needs no token here either.
 - Save:   the **"Save in GitHub to keep changes"** button (top bar) -> repo
           `vak-sah/NDD-notebook-driven-development`, branch `main`, path
           `command_center.ipynb`, write a commit message -> OK.

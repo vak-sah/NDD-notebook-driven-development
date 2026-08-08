@@ -8,12 +8,10 @@ If the user corrects the same thing twice, it belongs here.
 
 ## Manual one-time setup
 <!-- exact path, exact filename, exact format. once done, never asked again -->
-<!-- Drive paths are NOT listed here — they live in the notebook config cell and nowhere
-     else, so there is nothing to keep in sync. -->
-- [ ] Colab: **Edit > Notebook settings > Omit code cell output when saving this notebook** —
-      keeps test/run output out of the repo. Set once per notebook.
+<!-- Only genuinely manual things belong here. Drive paths live in the notebook config cell;
+     the config cell creates the Drive folders; CI strips notebook output. None of those are
+     setup steps any more, so none of them are listed. -->
 - [ ] Secrets: <Colab Secrets key name, or the Drive path> — placed by hand, never in git.
-      The config cell creates the Drive folders itself; nothing to make by hand.
 
 ## Colab <-> GitHub round trip
 - Open:   the badge in `README.md`, or
@@ -49,5 +47,7 @@ If the user corrects the same thing twice, it belongs here.
 ## Known-bad approaches
 <!-- tried, failed, don't retry -->
 - `nbstripout` / pre-commit hooks to clear notebook output. They never run for Colab's
-  **Save in GitHub**, which writes straight to the repo. The *Omit code cell output* setting
-  in the notebook is the thing that actually works.
+  **Save in GitHub**, which writes straight to the repo and never touches a local git hook.
+  Solved server-side instead: `.github/workflows/strip-notebook-output.yml` clears outputs on
+  push, which is the one place that catches every save. The Colab *Omit code cell output*
+  setting also works, but it has to be remembered per notebook — the workflow doesn't.

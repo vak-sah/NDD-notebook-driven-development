@@ -141,8 +141,8 @@ built (§6), calls into `src/` for what's settled, and visual output.
   considered — that's the part that gets forgotten. Group by the decision the user is making.
   Style is yours to pick; be consistent within the notebook rather than following a template.
 - **Tests never live in notebook cells.** They live in `tests/` and run in CI or the terminal,
-  so test output never piles up in the notebook. Colab's *Omit code cell output when saving*
-  keeps run output out of git (`PLAYBOOK.md`).
+  so test output never piles up in the notebook. Run output is stripped on push by CI, so it
+  never reaches git either (`PLAYBOOK.md`).
 - Cells run top-to-bottom on a fresh runtime. No hidden state, no out-of-order dependencies.
 - The user edits the notebook in Colab and commits with **Save in GitHub** (`PLAYBOOK.md`),
   usually after your step has landed — default values, personal touches. They save before

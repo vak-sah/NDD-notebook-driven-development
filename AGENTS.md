@@ -102,7 +102,7 @@ One feature at a time. Finish it, or park it explicitly in `STATE.md`.
 - Deleting work, force-pushing, rewriting history
 - Anything that costs money or leaves the repo
 - **Any real ambiguity.** If the purpose, scope or expected output isn't clear, ask before
-  implementing — once, up front, not drip-fed. This outranks the bias to act.
+  implementing.
 
 **`go` means:** implement everything you proposed and merge when CI is green. Full
 authorization. Don't re-confirm, don't restate the plan back.

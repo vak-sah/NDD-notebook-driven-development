@@ -3,52 +3,34 @@
 **Read when:** session start, and before re-deriving anything.
 **Changes:** whenever something is learned. Append, rarely delete.
 
-Environment quirks, manual setup, solved problems and dead ends.
-Not paths — those live in the notebook config cell, and only there.
+What this project learned the hard way: environment quirks, manual steps, solved problems, dead
+ends. It starts empty and fills as the work happens. An entry earns its place by saving someone
+from re-deriving something — if it's a fact about how the template works rather than something
+this project discovered, it belongs in `README.md` or a docstring instead.
+
+Not paths (notebook config cell), not layout or pipeline (`README.md`), not status (`STATE.md`).
 If the user corrects the same thing twice, it belongs here.
 
 ## Manual one-time setup
-<!-- exact path, exact filename, exact format. once done, never asked again -->
-<!-- Only genuinely manual things belong here. Drive paths live in the notebook config cell;
-     the config cell creates the Drive folders; CI strips notebook output. None of those are
-     setup steps any more, so none of them are listed. -->
-- [ ] Secrets: <Colab Secrets key name, or the Drive path> — placed by hand, never in git.
-
-## Colab <-> GitHub round trip
-- Open:   the badge in `README.md`, or
-          https://colab.research.google.com/github/vak-sah/NDD-notebook-driven-development/blob/main/command_center.ipynb
-- Auth:   no key, no token. First save pops up **"Authorize googlecolab"** (OAuth) — click it.
-          It can expire and re-prompt; that's normal. If the repo is ever made private, go to
-          colab.research.google.com/github once, tick **Include Private Repos**, authorize.
-- Save:   the **"Save in GitHub to keep changes"** button (top bar) -> repo
-          `vak-sah/NDD-notebook-driven-development`, branch `main`, path
-          `command_center.ipynb`, write a commit message -> OK.
-          That single click IS the commit. No PR, no merge step.
-- Refresh after the agent changed the notebook: reopen the same link; if it looks stale,
-  append `?flush_cache=true` or hard-reload.
-- Save before saying `go`, so the agent starts from your latest version.
-
-## Run / setup
-- Colab bootstrap: open the badge, run top to bottom. The setup cell mounts Drive, clones the
-  repo to `/content/repo` and puts `src/` on `sys.path`; the config cell makes the Drive folders.
-- Test command: `pytest -q` from the repo root. Needs no Drive, no network, no GPU — same
-  command in CI, a terminal, or a Colab cell.
+<!-- exact path, exact filename, exact format. once done, never asked again.
+     only things no cell can do — the config cell already makes the Drive folders, and CI
+     already strips notebook output. -->
+- _none yet_
 
 ## Reference notes
-<!-- what we're taking from each reference. written once, on first read. -->
-- _none yet_ — `<reference>` — `<what we take, what we deliberately don't>`
+<!-- what we take from each reference, and what we deliberately don't. written once, on first
+     read. if a reference could not actually be reached, say so here — never let notes written
+     from prior familiarity look like a live read. -->
+- _none yet_
 
 ## Conventions
+<!-- naming, ordering, anything a second person would otherwise guess at -->
 - _none yet_
-<!-- repo layout and pipeline order live in README.md, not here -->
 
 ## Gotchas
+<!-- surprises that cost time once and shouldn't cost it twice -->
 - _none yet_
 
 ## Known-bad approaches
-<!-- tried, failed, don't retry -->
-- `nbstripout` / pre-commit hooks to clear notebook output. They never run for Colab's
-  **Save in GitHub**, which writes straight to the repo and never touches a local git hook.
-  Solved server-side instead: `.github/workflows/strip-notebook-output.yml` clears outputs on
-  push, which is the one place that catches every save. The Colab *Omit code cell output*
-  setting also works, but it has to be remembered per notebook — the workflow doesn't.
+<!-- tried, failed, don't retry. if the fix is already applied, point at where it lives. -->
+- _none yet_

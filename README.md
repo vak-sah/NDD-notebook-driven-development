@@ -34,7 +34,13 @@ reason the current value won. It is the only thing you edit — setup below it j
 values, mounting Drive, cloning the repo so `src/` imports, installing deps.
 
 To keep notebook edits, use Colab's **Save in GitHub** button; that click is the commit, no PR
-step. Run output is stripped automatically on push, so it never reaches git.
+step. Run output is stripped automatically on push, so it never reaches git. Save before handing
+back to the agent, so it works from your current notebook.
+
+First save asks you to **Authorize googlecolab** — OAuth, nothing to store, and it may re-prompt
+later. If the notebook looks stale after the agent changed it, reopen the link or append
+`?flush_cache=true`. Tests are `pytest -q` from the repo root — no Drive, no network, no GPU, so
+the same command works in CI, a terminal, or a cell.
 
 ## Layout
 

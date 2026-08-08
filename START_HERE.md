@@ -66,7 +66,7 @@ Now do all of this without asking again:
   in `PLAYBOOK.md` § *Colab <-> GitHub round trip*, and `REPO_URL` in the notebook config cell.
 - **`DRIVE_ROOT`** in the notebook config cell — the folder from Step 3.
 - **`PLAYBOOK.md`** — reference notes from Step 2; the secret's *name* and location from Step 3.
-- **`README.md`** — delete the *Starting a project* section. It has served its purpose.
+- **`README.md`** — delete the *Start* section. It has served its purpose.
 
 Nothing in the repo should now name the template. Check with a search for the old owner/repo
 and the old Drive folder before moving on.

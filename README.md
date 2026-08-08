@@ -7,44 +7,29 @@
 A starting point for notebook-driven development: build features in a Colab command center,
 extract them to `src/` once they're settled, and keep the repo small enough to understand.
 
-> **Using this for a project?** Hit *Use this template*, open an agent session on the new repo,
-> and say hello. It interviews you and makes the repo yours — see **Starting a project** below.
-
-`command_center.ipynb` is where the work happens — features are built there, in as many cells
-as it takes to see them working, and moved into `src/` once they're settled. Open it in Colab,
-set the config cell, run.
-
-## Starting a project
+## Start
 
 <!-- The agent deletes this section during onboarding — see START_HERE.md, Step 4. -->
 
-1. **Use this template** on GitHub → *Create a new repository*. Name it after your project.
-   (Not *Fork* — a fork keeps this repo's history and stays tied to it.)
-2. **Open an agent session on the new repo and say hello.** That's the whole instruction.
+**Use this template → open an agent session on the new repo → say hello.**
 
-The repo carries `START_HERE.md`, which the agent reads first. It runs a short interview — what
-the project is for, what goes in and out, what done looks like, any references, which Drive
-folder, any credentials — then writes your answers into `STATE.md` and `README.md`, repoints the
-badge and the notebook at your repo, proposes an ordered route to MVP, and deletes itself.
+That is the whole procedure. `START_HERE.md` has the agent interview you — what the project is
+for, what goes in and out, any references, which Drive folder, any credentials — then write the
+answers into the repo, point everything at your repo, propose a route to MVP, and delete itself.
+Nothing to prepare, nothing to edit by hand.
 
-You don't have to prepare anything, and nothing needs editing by hand. If you'd rather do it
-yourself, `START_HERE.md` lists every file and value that changes.
+## Running it
 
-Then: **Edit → Notebook settings → Omit code cell output when saving**, once, in Colab. Without
-it every run's output gets committed.
+`command_center.ipynb` is the workspace: features get built there, in as many cells as it takes
+to see them working, and move into `src/` once they've settled. Click the badge and run top to
+bottom on a fresh runtime.
 
-## Quick start
+The **config cell** runs first and holds every knob, each with the alternatives weighed and the
+reason the current value won. It is the only thing you edit — setup below it just acts on those
+values, mounting Drive, cloning the repo so `src/` imports, installing deps.
 
-1. Click the badge above. It opens the notebook from `main` in Colab.
-   First save will ask you to **Authorize googlecolab** — OAuth, no token to store.
-2. **One-time:** work through *Manual one-time setup* in `PLAYBOOK.md`.
-3. Edit the **config cell** — it comes first, before anything runs. Every knob is there, with
-   its alternatives and why the current value won. Nothing you can change lives anywhere else.
-4. Run the setup cell — acts on that config: mounts Drive, makes the Drive folders, clones the
-   repo so `src/` is importable, installs deps. It holds no settings of its own.
-5. Run top to bottom.
-6. To keep your edits: the **Save in GitHub** button in the Colab toolbar. That click is the
-   commit — no PR, no merge step. Details in `PLAYBOOK.md`.
+To keep notebook edits, use Colab's **Save in GitHub** button; that click is the commit, no PR
+step. Run output is stripped automatically on push, so it never reaches git.
 
 ## Layout
 
@@ -53,7 +38,7 @@ command_center.ipynb   the workspace — setup, config cell, features being buil
 src/pipeline/          the archive: settled logic, one module per feature, docstring at the top
 tests/                 all tests. never in a notebook cell
 pyproject.toml         pytest config only — makes src/ importable. not packaging
-.github/workflows/     CI: runs the tests on every push
+.github/workflows/     CI: runs the tests, and strips notebook output, on every push
 .gitignore             keeps data, weights, caches, outputs and credentials out of git
 START_HERE.md          the first-session interview. deletes itself once the repo is yours
 README.md              this file: what, how to run, what's where, how it flows

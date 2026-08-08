@@ -13,7 +13,7 @@ A chat instruction beats this file for that turn only. Don't silently rewrite it
 | `README.md` | What is this, how do I run it, where does everything live, how does the pipeline flow | When structure or setup changes |
 | `AGENTS.md` | How we work (this file) | Rarely |
 | `CLAUDE.md` | Nothing of its own — imports `AGENTS.md` for Claude Code | Never |
-| `STATE.md` | What's done, what's now, what's next | Every PR |
+| `STATE.md` | What's done, what's now, what's next | When the project moves — a step lands, is parked or reordered |
 | `PLAYBOOK.md` | Environment quirks, manual setup, solved problems, dead ends | When something is learned |
 | docstrings | What this specific feature does and how to change it | With their code |
 
@@ -39,13 +39,6 @@ contract, and it gets fixed once.
   "what is this, why, what do I change?" A correct repo the user can't reason about has failed.
 - We may follow **one or more references** (repos, sites, papers, products). We replicate them
   *our way*; ending up somewhere different is an acceptable outcome, not a failure.
-- **This repo is a reusable NDD template, and it develops itself under its own rules.** Work on
-  the template is proposed, verified, landed and logged in `STATE.md` exactly like any feature.
-  If the contract is awkward to follow while improving the contract, that's the strongest signal
-  it's wrong — say so in **Needs you**.
-- **Template-shaped content is correct until a clone happens** — `STATE.md` §1/§2/§4 and
-  `README.md`'s title describe the template itself. Don't "fix" them unprompted. The handover
-  procedure is §2, *First session on a clone*.
 - **The repo is the memory.** A fresh agent reading `STATE.md` + `README.md` + `PLAYBOOK.md`
   (§2, in that order) must be able to continue correctly. Knowledge that exists only in chat is lost.
 
@@ -67,18 +60,29 @@ If it doesn't exist, onboarding already happened. Use the loop below.
 
 **Session start:** read `STATE.md`, then `README.md`, then `PLAYBOOK.md`, then skim only the
 code the next item touches. Open with ≤5 lines: where we are → proposed next step → why it's
-next. `git log` has the detailed chronology; `STATE.md` deliberately doesn't. If you needed
-context that wasn't in the repo, those three files are wrong — fix them as part of the step.
+next. `git log` has the detailed chronology; `STATE.md` deliberately doesn't.
+
+If you had to **ask the user something the repo should already have answered**, or re-derive
+something you could have read, write the answer down in the same PR. Where it goes: an
+environment quirk, a manual step or a dead end → `PLAYBOOK.md`; where the project stands →
+`STATE.md`; what a module does or how to change it safely → its docstring. The test is simply
+whether the next session would have to ask the same question again.
 
 1. **Propose** the next feature, ordered from repo state + reference. One line on why now.
 2. **Frame** it: purpose, 1–2 alternatives, your pick, the tradeoff. Skip for routine plumbing.
 3. **Wait for `go`** only where §3 says ask. `go` = the user's answer to your proposal.
-4. **Implement.** Docstrings always land with the code, wherever it lives. While a feature is
-   still in the notebook its visual output *is* its check, so test files wait for the extraction
-   PR (§6). Anything already in `src/` gets its tests in the same change, not later.
+4. **Implement.** Docstrings always land with the code, wherever it lives. Anything already in
+   `src/` gets its tests in the same change, not later. Formal test *files* for notebook code
+   wait for the extraction PR (§6) — but run the cheap checks yourself first: does the notebook
+   still parse, does the module import, does the function return what you claim on one small
+   input. The user's run should fail on a question of judgement, never on a typo you could have
+   caught in seconds.
 5. **Verify** — the fastest possible proof it works (§8).
 6. **Land** — merge once CI is green.
-7. **Update `STATE.md` in the same PR.** A merged step missing from `STATE.md` didn't happen.
+7. **Update `STATE.md` when the project actually moved** — a step landed, was reverted, got
+   parked, or the queue changed order. *Not* for a bugfix, a CI fix, a doc correction or a
+   second attempt inside a step that's already listed; `git log` carries those, and `STATE.md`
+   stays readable by leaving them out. If you're unsure an entry earns its place, it doesn't.
    `README.md` only when the layout or pipeline actually changed — during exploration that
    normally means at extraction (§6), not every step.
 
@@ -180,8 +184,9 @@ Two things never wait:
 - **Docstrings.** Every function carries one from the moment it's written, in the notebook cell,
   so the user can read the cell and check it does what it claims. They travel with the code on
   extraction. They're a paragraph, not a chore.
-- **`STATE.md`.** Updated every step, exploration or not. While `README.md` lags reality between
-  exploration and extraction, `STATE.md` is what keeps the user oriented.
+- **`STATE.md`.** Current as of the last step that landed, exploration or not. While `README.md`
+  lags reality between exploration and extraction, `STATE.md` is what keeps the user oriented.
+  Steps, not attempts — the cadence is §2.7.
 
 **Removing one:** delete its module, its config-cell block, its call site, its tests, its
 pipeline line, and note it in `STATE.md` §6 with a one-line reason. If removal touches anything
@@ -257,7 +262,7 @@ say so in a word and move on.
 6. **Parked / dropped** — with a one-line reason, so it isn't re-proposed.
 
 The queue is re-ordered freely as the user redirects; the **Goal** is what stays fixed.
-Seeding a fresh `STATE.md` is §2, *First session on a clone*.
+Seeding a fresh `STATE.md` happens once, during onboarding (§2).
 
 `PLAYBOOK.md` holds anything you'd otherwise re-derive: Colab quirks, manual setup steps, run
 commands, naming conventions, known-bad approaches, and any correction made more than once.

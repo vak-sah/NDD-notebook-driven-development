@@ -41,6 +41,7 @@ pyproject.toml         pytest config only — makes src/ importable. not packagi
 .github/workflows/     CI: runs the tests, and strips notebook output, on every push
 .gitignore             keeps data, weights, caches, outputs and credentials out of git
 START_HERE.md          the first-session interview. deletes itself once the repo is yours
+LICENSE                Apache 2.0
 README.md              this file: what, how to run, what's where, how it flows
 STATE.md               what's done, what's in progress, what's next
 PLAYBOOK.md            Colab quirks, manual setup, solved problems, dead ends

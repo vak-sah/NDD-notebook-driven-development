@@ -3,7 +3,8 @@
 **Read when:** session start, and before re-deriving anything.
 **Changes:** whenever something is learned. Append, rarely delete.
 
-Project-specific paths, quirks, solved problems and dead ends.
+Environment quirks, manual setup, solved problems and dead ends.
+Not paths — those live in the notebook config cell, and only there.
 If the user corrects the same thing twice, it belongs here.
 
 ## Manual one-time setup
@@ -35,14 +36,14 @@ If the user corrects the same thing twice, it belongs here.
 
 ## Reference notes
 <!-- what we're taking from each reference. written once, on first read. -->
-- <reference> — <what we take, what we deliberately don't>
+- _none yet_ — `<reference>` — `<what we take, what we deliberately don't>`
 
 ## Conventions
-- Naming:
+- _none yet_
 <!-- repo layout and pipeline order live in README.md, not here -->
 
 ## Gotchas
-- 
+- _none yet_
 
 ## Known-bad approaches
 <!-- tried, failed, don't retry -->

@@ -24,6 +24,10 @@ Each file has exactly one job. If two files would say the same thing, one of the
 GitHub landing page and a human needs the list there. Change one, change the other — it's the
 only coupling in the repo, and it's cheap.
 
+`tests/test_docs.py` enforces the mechanical half of this in CI: referenced files exist, `§N`
+cross-references resolve, and § Layout matches what's actually on disk. It says nothing about
+wording. If it fails, a pointer is genuinely broken — fix the pointer, not the test.
+
 **When rules collide**, precedence is: the user's message this turn, then `STATE.md` (what's
 actually true now), then this file, then your own judgement. If two sections of *this file*
 disagree, say so in **Needs you** rather than picking one silently — that's a bug in the
@@ -163,17 +167,17 @@ while it's still being figured out; that hides it from the person who has to ver
 
 **Extract once it's solid** — it works, the user has verified it, and the shape has stopped
 changing. Extraction is its own PR with **no behaviour change**: the code moves into
-`src/<pkg>/`, the notebook keeps the knobs, the call, and the visual output. Extract when the
+`src/pipeline/`, the notebook keeps the knobs, the call, and the visual output. Extract when the
 feature is settled, when another part needs it, or when the cells have outgrown the workspace —
 not on a schedule.
 
 An extracted feature has:
-1. A module under `src/<pkg>/` with a docstring: purpose, inputs/outputs, safe knobs.
+1. A module under `src/pipeline/` with a docstring: purpose, inputs/outputs, safe knobs.
 2. Its knobs still in the notebook config cell, with alternatives and rationale.
 3. One call site in the pipeline, and its line in `README.md`'s pipeline section.
 4. Tests in `tests/`.
 
-`src/<pkg>/` is the archive of what's settled. The notebook is the workspace.
+`src/pipeline/` is the archive of what's settled. The notebook is the workspace.
 
 **While exploring, don't document a moving target.** During expansion the notebook is allowed to
 be messy. `README.md` and test files catch up at extraction, in one pass, when the shape has

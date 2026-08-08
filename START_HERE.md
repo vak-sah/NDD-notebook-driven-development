@@ -8,8 +8,8 @@ user's* project. Work through it in order. The user is likely an amateur in this
 verifies slower than you produce — so ask in small groups, wait for each answer, and never ask
 for something you can read yourself.
 
-Open the session with one line: *"This looks like a fresh copy of the template — four quick
-questions and it's yours."* Then Step 1.
+Open the session with one line: *"This looks like a fresh copy of the template — a few
+questions, in three short rounds, and it's yours."* Then Step 1.
 
 ---
 

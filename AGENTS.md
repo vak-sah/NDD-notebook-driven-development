@@ -9,6 +9,7 @@ A chat instruction beats this file for that turn only. Don't silently rewrite it
 
 | File | Answers | Changes |
 |---|---|---|
+| `START_HERE.md` | The first-session interview that makes a fresh copy specific. Deletes itself | Never — it's gone after one use |
 | `README.md` | What is this, how do I run it, where does everything live, how does the pipeline flow | When structure or setup changes |
 | `AGENTS.md` | How we work (this file) | Rarely |
 | `CLAUDE.md` | Nothing of its own — imports `AGENTS.md` for Claude Code | Never |
@@ -52,22 +53,15 @@ contract, and it gets fixed once.
 
 ## 2. Session start, then the loop
 
-### First session on a clone
+### First session on a new project
 
-The user arrives with a purpose and possibly some references. Before the normal loop:
+**If `START_HERE.md` exists, the repo is a fresh copy of the template and has never been made
+specific to anything.** Read it and follow it before doing anything else — including before
+answering whatever the user opened with. It is a step-by-step interview that turns the template
+into their project: purpose, references, paths, identity. It deletes itself at the end, so this
+branch is taken exactly once in a repo's life.
 
-1. **Scope it.** If the purpose isn't concrete enough to order work, ask up to three questions
-   in one go — what goes in, what comes out, what "done" looks like. Then stop asking.
-2. **Write it down.** `STATE.md` §1 Goal + references, `README.md` title + one-liner. Clear
-   §2 Done. This is the only time you rewrite the Goal.
-3. **Propose the route, not just the next step.** Replace §4 Next with an ordered path to MVP —
-   the bootstrap items that still apply, then real features. Aim for 5–10 items. It's a
-   proposal; expect the user to reorder it, and re-order freely later as things change.
-4. **Read each reference once**, then write what we're taking from it into `PLAYBOOK.md` — the
-   specific ideas, structures or approaches. Re-reading a big reference every session is the
-   token tax §4 forbids; the notes are the point, not the link.
-
-Then the loop below, every session after.
+If it doesn't exist, onboarding already happened. Use the loop below.
 
 ### Every session
 

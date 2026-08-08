@@ -7,30 +7,31 @@
 A starting point for notebook-driven development: build features in a Colab command center,
 extract them to `src/` once they're settled, and keep the repo small enough to understand.
 
-> **Using this for a project?** Hit *Use this template* on GitHub — cleaner than cloning, you
-> get fresh history. Then work through **Make it yours** below. Everything else runs as-is.
+> **Using this for a project?** Hit *Use this template*, open an agent session on the new repo,
+> and say hello. It interviews you and makes the repo yours — see **Starting a project** below.
 
 `command_center.ipynb` is where the work happens — features are built there, in as many cells
 as it takes to see them working, and moved into `src/` once they're settled. Open it in Colab,
 set the config cell, run.
 
-## Make it yours
+## Starting a project
 
-Five places name the template. **Actions → *Make it yours* → Run workflow** rewrites all five
-from your repo's own name and deletes itself — one click, nothing to edit.
+<!-- The agent deletes this section during onboarding — see START_HERE.md, Step 4. -->
 
-Or do them by hand and delete `.github/workflows/make-it-yours.yml`:
+1. **Use this template** on GitHub → *Create a new repository*. Name it after your project.
+   (Not *Fork* — a fork keeps this repo's history and stays tied to it.)
+2. **Open an agent session on the new repo and say hello.** That's the whole instruction.
 
-1. **The badge above** — swap `vak-sah/NDD-notebook-driven-development` for your own
-   `owner/repo`. Left alone it opens *this* template's notebook, not yours.
-2. **`command_center.ipynb` → setup cell** — the same swap, in `REPO_URL`.
-3. **`command_center.ipynb` → config cell** — rename the last folder of `DRIVE_ROOT` after your
-   project. Two projects both left on `NDD` share one Drive folder and overwrite each other.
-4. **`PLAYBOOK.md` → *Colab <-> GitHub round trip*** — the same swap, in two places.
+The repo carries `START_HERE.md`, which the agent reads first. It runs a short interview — what
+the project is for, what goes in and out, what done looks like, any references, which Drive
+folder, any credentials — then writes your answers into `STATE.md` and `README.md`, repoints the
+badge and the notebook at your repo, proposes an ordered route to MVP, and deletes itself.
 
-Nothing else in the repo names a project. Then tell the agent your purpose and any references,
-and it writes the title and one-liner at the top of this file plus `STATE.md` §1 Goal — the last
-things that still describe the template rather than you.
+You don't have to prepare anything, and nothing needs editing by hand. If you'd rather do it
+yourself, `START_HERE.md` lists every file and value that changes.
+
+Then: **Edit → Notebook settings → Omit code cell output when saving**, once, in Colab. Without
+it every run's output gets committed.
 
 ## Quick start
 
@@ -54,6 +55,7 @@ tests/                 all tests. never in a notebook cell
 pyproject.toml         pytest config only — makes src/ importable. not packaging
 .github/workflows/     CI: runs the tests on every push
 .gitignore             keeps data, weights, caches, outputs and credentials out of git
+START_HERE.md          the first-session interview. deletes itself once the repo is yours
 README.md              this file: what, how to run, what's where, how it flows
 STATE.md               what's done, what's in progress, what's next
 PLAYBOOK.md            Colab quirks, manual setup, solved problems, dead ends

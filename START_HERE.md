@@ -1,0 +1,91 @@
+# START HERE — first session on a new project
+
+**Read when:** this file exists. That means the repo is a fresh copy of the template and has
+never been made specific to anything. **Deleted:** at the end of this procedure, by you.
+
+You are the agent. This is a script for the interview that turns a generic template into *this
+user's* project. Work through it in order. The user is likely an amateur in this domain and
+verifies slower than you produce — so ask in small groups, wait for each answer, and never ask
+for something you can read yourself.
+
+Open the session with one line: *"This looks like a fresh copy of the template — four quick
+questions and it's yours."* Then Step 1.
+
+---
+
+## Step 0 — Read, don't ask
+
+Before the first question, gather these silently. Asking for any of them is a bug.
+
+| Value | Where from |
+|---|---|
+| `owner/repo` | `git remote get-url origin` |
+| Default branch | `git symbolic-ref refs/remotes/origin/HEAD`, or `main` |
+| Suggested project name | the repo name |
+
+## Step 1 — Purpose
+
+Ask these three together, in one message, and stop:
+
+1. **What is this project for?** One or two sentences is plenty.
+2. **What goes in and what comes out?** Data, files, an API, a number, a plot, a model —
+   or "nothing yet", which is a real answer at this stage.
+3. **What does done look like?** The thing that, once it works, means the MVP worked.
+
+If an answer is vague, ask **one** follow-up. Not three. A vague Goal that gets sharpened in
+week two is normal and costs less than an interrogation on day one.
+
+## Step 2 — References
+
+> Are there repos, papers, sites or products you want this to follow? Links, and roughly what
+> to take from each. "None" is fine.
+
+Zero, one or several. For each one given: read it **once**, now, and write what you're taking
+into `PLAYBOOK.md` § *Reference notes* — the specific ideas, structures or approaches, and what
+you're deliberately *not* taking. Those notes are the point; re-reading a big reference every
+session is a tax the repo exists to avoid.
+
+## Step 3 — Environment and paths
+
+> Three quick ones:
+> - **Drive folder** for this project's data and outputs — `MyDrive/<name>`. I'll default to
+>   `<repo name>` if you don't mind.
+> - **Where does the input come from?** A file you'll drop in Drive, a download, an API, or
+>   nothing yet.
+> - **Any credentials needed?** An API key or token — name it, don't paste it. It goes in Colab
+>   Secrets or a Drive file, never in the repo.
+
+## Step 4 — Write it down
+
+Now do all of this without asking again:
+
+- **`STATE.md` §1** — replace the whole Goal section with theirs, plus the references. This is
+  the only time you rewrite the Goal.
+- **`README.md`** — the title and the one-liner under it.
+- **Repo identity**, using the `owner/repo` from Step 0 — the README Colab badge, the two URLs
+  in `PLAYBOOK.md` § *Colab <-> GitHub round trip*, and `REPO_URL` in the notebook config cell.
+- **`DRIVE_ROOT`** in the notebook config cell — the folder from Step 3.
+- **`PLAYBOOK.md`** — reference notes from Step 2; the secret's *name* and location from Step 3.
+- **`README.md`** — delete the *Starting a project* section. It has served its purpose.
+
+Nothing in the repo should now name the template. Check with a search for the old owner/repo
+and the old Drive folder before moving on.
+
+## Step 5 — Propose the route
+
+Replace `STATE.md` §4 Next with an ordered path to their MVP — aim for 5–10 items, each one
+line. Real features, not setup: the template already ships the notebook, `src/`, `tests/` and
+CI, so the first item is the first thing their project actually *does*.
+
+Show it and say plainly that it's a proposal and reordering is expected. Then stop and wait.
+
+## Step 6 — Finish
+
+Delete this file. Commit everything from Steps 4 and 5 together, push, and open a PR.
+
+Report in the normal format (`AGENTS.md` §9). Under **Verify**, give them the one check that
+matters: open the notebook badge and run top to bottom, confirming it's now pointed at their
+repo and their Drive folder.
+
+From the next session on, `AGENTS.md` §2 *Every session* is the loop. This file is gone and
+never read again.

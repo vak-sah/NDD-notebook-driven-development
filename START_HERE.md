@@ -108,6 +108,10 @@ CI, so the first item is the first thing their project actually *does*.
 
 Show it and say plainly that it's a proposal and reordering is expected. Then stop and wait.
 
+This is the one approval that matters, so get it right: from here on the queue is standing
+authorization, and later sessions work through it without asking again (`AGENTS.md` §2, §3).
+Reordering it later is always the user's to ask for, and always free.
+
 ## Step 6 — Finish
 
 Delete this file. Commit everything from Steps 4 and 5 as one commit, and push it **to the

@@ -8,8 +8,15 @@ user's* project. Work through it in order. The user is likely an amateur in this
 verifies slower than you produce — so ask in small groups, wait for each answer, and never ask
 for something you can read yourself.
 
-Open the session with one line: *"This looks like a fresh copy of the template — a few
-questions, in three short rounds, and it's yours."* Then Step 1.
+Where an answer is really a **choice between a few known options**, offer the options rather than
+an open question. Someone unfamiliar with the domain picks far faster than they compose, and the
+options themselves show what's possible. Keep open questions for things only they can know.
+
+Open the session with one line: *"This looks like a fresh copy of the template — a couple of
+rounds of questions and it's yours."* Then Step 1.
+
+Ask **Steps 2 and 3 together** in one message. They're short and independent, and two rounds cost
+the user less than three for the same answers.
 
 ---
 
@@ -48,12 +55,21 @@ Ask these three together, in one message, and stop:
 If an answer is vague, ask **one** follow-up. Not three. A vague Goal that gets sharpened in
 week two is normal and costs less than an interrogation on day one.
 
-**Then check the shape fits.** This repo is a Colab notebook over data, extracting to `src/`.
-If the answers describe something whose centre of gravity is elsewhere — a web app, a mobile
-app, a service — say so before writing anything down, and name the shape that *would* work here
-(what the notebook produces, what consumes it). The user may want to proceed anyway; that's
-their call to make with the mismatch visible. Naming it now costs a paragraph. Discovering it at
-Step 5 costs the whole queue.
+**Then check the plan can actually work.** Two things can invalidate it before a line is
+written, and both are far cheaper to catch here than at Step 5.
+
+*Does the shape fit?* This repo is a Colab notebook over data, extracting to `src/`. If the
+answers describe something whose centre of gravity is elsewhere — a web app, a mobile app, a
+service — say so before writing anything down, and name the shape that *would* work here: what
+the notebook produces, and what consumes it.
+
+*Is anything blocking?* Licensing, terms of service, cost, rate limits, or access to data the
+user doesn't control. If the goal depends on any of those, say what the constraint is and whether
+it kills the goal or merely shapes it, then record it in `PLAYBOOK.md` § *Gotchas* so nobody
+re-derives it.
+
+In both cases: name it, recommend a way forward, and proceed — don't stop, and don't quietly
+build a queue on a premise you already doubt. The user decides with the problem visible.
 
 ## Step 2 — References
 

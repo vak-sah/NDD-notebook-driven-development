@@ -2,6 +2,8 @@
 
 <!-- Read when: orienting, or before running anything. Changes: when structure or setup changes. -->
 
+<!-- ON CLONE: repoint this badge at your own repo (owner/name). Left as-is it opens the
+     template's notebook, not yours — and you won't be able to save into it. -->
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vak-sah/NDD-notebook-driven-development/blob/main/command_center.ipynb)
 
 A starting point for notebook-driven development: build features in a Colab command center,

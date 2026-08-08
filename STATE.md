@@ -17,7 +17,13 @@ References:
 ## 2. Done
 <!-- EVERY merged step, oldest first, numbered, one line each. complete but brief.
      scan this to spot anything missed. detail lives in git log. -->
-1. _nothing yet_
+1. `command_center.ipynb` — setup (mount Drive, clone repo, `sys.path`, deps), config cell
+   (Drive root + derived paths, alternatives recorded), pipeline cell
+2. Repo skeleton — `src/pipeline/`, `tests/`, `pyproject.toml` so `src/` imports without install
+3. End-to-end stub — text file in, records through untouched, text file out; in `README.md`
+   § Pipeline
+4. CI — `pytest -q` on every push and PR
+5. `README.md` § *Make it yours* — the four one-line edits that de-template a clone
 
 ## 3. In progress
 <!-- at most one. branch name + where it stopped -->
@@ -25,13 +31,9 @@ References:
 
 ## 4. Next
 <!-- ordered queue to MVP, one line each. re-order freely as the user redirects. -->
-1. `command_center.ipynb` — setup cell (mount Drive, install deps) + empty config cell
-   <!-- do this first: the README badge 404s until this file exists on main -->
-2. Repo skeleton — `src/<pkg>/`, `tests/`
-3. End-to-end stub — input → passthrough → output, recorded in `README.md` § Pipeline
-4. CI — run tests on push
-5. Prove the loop — build one throwaway feature in the notebook and extract it, to confirm
-   a clone can do the same without touching anything else
+<!-- ON CLONE: this is your feature queue, not scaffolding. The template ships complete —
+     the first item below is the first thing your project actually does. -->
+1. _your first feature — replace the stub's `transform` with a real stage_
 
 ## 5. Optional / later
 <!-- would step the project up, not blocking MVP -->

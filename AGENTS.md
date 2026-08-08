@@ -13,7 +13,7 @@ A chat instruction beats this file for that turn only. Don't silently rewrite it
 | `AGENTS.md` | How we work (this file) | Rarely |
 | `CLAUDE.md` | Nothing of its own — imports `AGENTS.md` for Claude Code | Never |
 | `STATE.md` | What's done, what's now, what's next | Every PR |
-| `PLAYBOOK.md` | Project-specific paths, quirks, solved problems, dead ends | When something is learned |
+| `PLAYBOOK.md` | Environment quirks, manual setup, solved problems, dead ends | When something is learned |
 | docstrings | What this specific feature does and how to change it | With their code |
 
 Code layout is not here — that's `README.md` § Layout.
@@ -202,8 +202,8 @@ not a local machine.
 
 - **Only code, config and docs go in git.** Data, weights, caches, outputs and credentials live
   in Drive and are `.gitignore`d. Path *strings* are fine to commit — it's the files that stay out.
-- **One Drive root**, recorded in `PLAYBOOK.md`, set in the notebook config cell. Never
-  hardcoded in more than one place.
+- **One Drive root**, set in the notebook config cell and nowhere else — not in `PLAYBOOK.md`,
+  not in a module. One place to change means nothing to keep in sync.
 - **Secrets never touch the repo** and are never printed in a cell. Colab Secrets, or a file at
   the agreed Drive path.
 - **Manual setup is one-time and explicit.** If the user must place a file by hand, give exact
@@ -265,6 +265,7 @@ say so in a word and move on.
 The queue is re-ordered freely as the user redirects; the **Goal** is what stays fixed.
 Seeding a fresh `STATE.md` is §2, *First session on a clone*.
 
-`PLAYBOOK.md` holds anything you'd otherwise re-derive: Drive paths, Colab quirks, run
+`PLAYBOOK.md` holds anything you'd otherwise re-derive: Colab quirks, manual setup steps, run
 commands, naming conventions, known-bad approaches, and any correction made more than once.
+Not paths — those live in the notebook config cell.
 If the user corrects you twice on the same thing, write it there in the same turn.

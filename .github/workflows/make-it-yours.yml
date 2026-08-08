@@ -1,0 +1,60 @@
+# One-shot de-templating. Run it once, from the Actions tab, after creating a repo from this
+# template: Actions > "Make it yours" > Run workflow.
+#
+# It rewrites the five places that name the template — the README badge, the two PLAYBOOK
+# round-trip URLs, and REPO_URL and DRIVE_ROOT in the notebook — using this repository's own
+# name, commits the result, and deletes itself. Nothing to edit by hand, nothing left over.
+#
+# It refuses to run on the template repo itself, so a stray click can't rename the original.
+# Deleting this file instead of running it is a perfectly good option: README's "Make it yours"
+# lists the same five edits for doing them yourself.
+
+name: Make it yours
+
+on:
+  workflow_dispatch:
+    inputs:
+      drive_folder:
+        description: "Drive folder under MyDrive/ for this project's data and outputs"
+        required: true
+        default: "my-project"
+
+permissions:
+  contents: write
+
+jobs:
+  rewrite:
+    # The template's own slug. On a repo made from the template this differs, and the job runs.
+    if: github.repository != 'vak-sah/NDD-notebook-driven-development'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rewrite template references
+        env:
+          NEW_SLUG: ${{ github.repository }}
+          DRIVE_FOLDER: ${{ inputs.drive_folder }}
+        run: |
+          set -euo pipefail
+          OLD_SLUG="vak-sah/NDD-notebook-driven-development"
+
+          # The notebook is JSON, but both values appear as plain substrings inside it, so a
+          # literal replacement is safe and leaves the JSON structure untouched.
+          files="README.md PLAYBOOK.md command_center.ipynb"
+          sed -i "s|${OLD_SLUG}|${NEW_SLUG}|g" $files
+          sed -i "s|MyDrive/NDD|MyDrive/${DRIVE_FOLDER}|g" command_center.ipynb
+
+          python3 -c "import json; json.load(open('command_center.ipynb'))"
+          echo "Remaining references to the template (expected: none):"
+          ! grep -rn "$OLD_SLUG" $files
+
+          rm .github/workflows/make-it-yours.yml
+
+      - name: Commit
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Make it yours: point the template at ${{ github.repository }}"
+          git push

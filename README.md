@@ -2,8 +2,6 @@
 
 <!-- Read when: orienting, or before running anything. Changes: when structure or setup changes. -->
 
-<!-- ON CLONE: repoint this badge at your own repo (owner/name). Left as-is it opens the
-     template's notebook, not yours — and you won't be able to save into it. -->
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vak-sah/NDD-notebook-driven-development/blob/main/command_center.ipynb)
 
 A starting point for notebook-driven development: build features in a Colab command center,
@@ -21,8 +19,6 @@ set the config cell, run.
 
 1. Click the badge above. It opens the notebook from `main` in Colab.
    First save will ask you to **Authorize googlecolab** — OAuth, no token to store.
-   **Private repo?** Authorize once at colab.research.google.com/github with
-   **Include Private Repos** ticked first, or Colab 404s and can't see the repo at all.
 2. **One-time:** work through *Manual one-time setup* in `PLAYBOOK.md`.
 3. Run the setup cell — mounts Drive, installs deps.
 4. Edit the **config cell**. Every knob is there, with its alternatives and why the current

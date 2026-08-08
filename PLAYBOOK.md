@@ -7,8 +7,6 @@ Project-specific paths, quirks, solved problems and dead ends.
 If the user corrects the same thing twice, it belongs here.
 
 ## Drive layout
-<!-- ON CLONE: rename the root folder after your project, here and in the notebook config
-     cell. Two clones left on the same name share one Drive folder. -->
 - Drive root: `/content/drive/MyDrive/NDD/`   <- set once in the notebook config cell
 - Data:       `<root>/data/`
 - Outputs:    `<root>/outputs/`
@@ -21,21 +19,11 @@ If the user corrects the same thing twice, it belongs here.
 - [ ] Create the Drive root above and place any secret file there by hand.
 
 ## Colab <-> GitHub round trip
-<!-- ON CLONE: every `vak-sah/NDD-notebook-driven-development` below is the template's repo.
-     Swap in your own owner/name, or you'll be pointed at the wrong repo. -->
 - Open:   the badge in `README.md`, or
           https://colab.research.google.com/github/vak-sah/NDD-notebook-driven-development/blob/main/command_center.ipynb
 - Auth:   no key, no token. First save pops up **"Authorize googlecolab"** (OAuth) — click it.
-          It can expire and re-prompt; that's normal.
-          **Private repo?** The plain grant doesn't cover it — authorize once at
-          colab.research.google.com/github with **Include Private Repos** ticked, or Colab
-          can't see the repo at all. *Use this template* creates a private repo by default,
-          so most clones need this; a public repo doesn't.
-- Token:  never for opening or saving the notebook — the OAuth grant above covers that,
-          private repos included. Only a **cell** that `git clone`s a private repo needs one,
-          since plain git can't use the browser's session: fine-grained PAT, *Contents: read*,
-          kept as a Colab Secret and read via `google.colab.userdata`. Never pasted into a
-          cell, never committed.
+          It can expire and re-prompt; that's normal. If the repo is ever made private, go to
+          colab.research.google.com/github once, tick **Include Private Repos**, authorize.
 - Save:   the **"Save in GitHub to keep changes"** button (top bar) -> repo
           `vak-sah/NDD-notebook-driven-development`, branch `main`, path
           `command_center.ipynb`, write a commit message -> OK.
@@ -57,9 +45,7 @@ If the user corrects the same thing twice, it belongs here.
 <!-- repo layout and pipeline order live in README.md, not here -->
 
 ## Gotchas
-- Colab `404` on `api.github.com/repos/.../contents/` means the **private-repo grant is
-  missing**, not a bad branch or a missing file — GitHub returns 404, never 403, for a repo
-  the token can't see, so the message points nowhere useful. Fix is *Auth* above.
+- 
 
 ## Known-bad approaches
 <!-- tried, failed, don't retry -->

@@ -55,7 +55,7 @@ START_HERE.md          the first-session interview. deletes itself once the repo
 LICENSE                Apache 2.0
 README.md              this file: what, how to run, what's where, how it flows
 STATE.md               what's done, what's in progress, what's next
-PLAYBOOK.md            Colab quirks, manual setup, solved problems, dead ends
+PLAYBOOK.md            environment quirks, manual setup, solved problems, dead ends
 AGENTS.md              how agents and the user work in this repo
 CLAUDE.md              points Claude Code at AGENTS.md
 ```

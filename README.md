@@ -19,6 +19,8 @@ set the config cell, run.
 
 1. Click the badge above. It opens the notebook from `main` in Colab.
    First save will ask you to **Authorize googlecolab** — OAuth, no token to store.
+   **Private repo?** Authorize once at colab.research.google.com/github with
+   **Include Private Repos** ticked first, or Colab 404s and can't see the repo at all.
 2. **One-time:** work through *Manual one-time setup* in `PLAYBOOK.md`.
 3. Run the setup cell — mounts Drive, installs deps.
 4. Edit the **config cell**. Every knob is there, with its alternatives and why the current

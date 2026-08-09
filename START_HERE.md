@@ -143,8 +143,12 @@ default branch** — not to a feature branch with a PR. Onboarding is initializa
 reviewable change: there is nothing to review, and a copy whose onboarding sits unmerged on a
 branch is indistinguishable from a copy that was never onboarded at all.
 
-If your environment forces branch-based work, push the branch and open the PR, then say in the
-report — plainly, not as a footnote — that **onboarding is not complete until that PR is merged**.
+If your environment forces branch-based work, push the branch, open the PR, and **merge it
+yourself** once CI is green — marking it ready for review first if it was opened as a draft.
+`AGENTS.md` §3 already authorises that merge and this is the one change with nothing to review,
+so stopping here hands the user a blocker they cannot act on any better than you can. Only if
+the merge is actually refused does it become theirs: say so in the report — plainly, not as a
+footnote — that **onboarding is not complete until that PR is merged**, and why you could not.
 
 **Then confirm it landed.** Re-read the default branch and check `START_HERE.md` is actually gone
 from it. A local commit is not evidence; never report success on one.

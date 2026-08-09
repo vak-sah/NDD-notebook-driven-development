@@ -153,6 +153,12 @@ authorization. Don't re-confirm, don't restate the plan back.
 - **Feature docs live in the code** — module or function docstring: what it does,
   inputs/outputs, what to change to modify it safely. No parallel doc file to drift.
   When they're written: §6.
+- **A coined name carries its meaning where it's defined.** Any term you introduce — a metric, a
+  field, a mode, a threshold — is jargon to a user who is an amateur in the domain (§8), and to
+  the same user six months on. Beside the definition, say what it measures and what a good value
+  looks like. If the term reaches a printed report or a stored record, that one line goes into
+  the record too, so an output opened later explains itself without the code. The bullet above is
+  why this is never a glossary file.
 - **Docs are updated when they become wrong, not on a schedule.** One job per file keeps those
   updates to a line or two. If keeping a doc current feels like busywork, the doc is wrong.
 

@@ -1,8 +1,8 @@
 # Keeps run output out of git, so nobody has to remember a Colab setting.
 #
 # Colab's "Save in GitHub" writes straight to the repo, which is why client-side tools
-# (nbstripout, pre-commit) never fire for it — see PLAYBOOK.md, Known-bad approaches. Doing it
-# server-side is the one place that does catch every save.
+# (nbstripout, pre-commit) never fire for it. Doing it server-side is the one place that does
+# catch every save.
 
 name: strip notebook output
 

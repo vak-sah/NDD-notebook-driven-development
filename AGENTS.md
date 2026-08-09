@@ -176,8 +176,8 @@ built (§6), calls into `src/` for what's settled, and visual output.
 - **Tests never live in notebook cells.** They live in `tests/` and run in CI or the terminal,
   so test output never piles up in the notebook. This and the config-cell rule above are enforced
   by `tests/test_notebook.py`, which also checks every cell still parses — the notebook is the
-  one file CI cannot execute, so a break there otherwise reaches the default branch unnoticed. Run output is stripped on push by CI, so it
-  never reaches git either (`PLAYBOOK.md`).
+  one file CI cannot execute, so a break there otherwise reaches the default branch unnoticed.
+  Run output is stripped on push by CI, so it never reaches git either.
 - Cells run top-to-bottom on a fresh runtime. No hidden state, no out-of-order dependencies.
 - The user edits the notebook in Colab and commits with **Save in GitHub** (`README.md`),
   usually after your step has landed — default values, personal touches. They save before

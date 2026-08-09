@@ -17,7 +17,7 @@ References:
      a step lands as `(unchecked)`; the mark clears when the user confirms its check passed, so
      merged and known-to-work stay distinguishable.
      scan this to spot anything missed. detail lives in git log. -->
-1. _nothing yet_
+_nothing yet_
 
 ## 3. In progress
 <!-- at most one. branch name + where it stopped -->

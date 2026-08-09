@@ -39,8 +39,9 @@ back to the agent, so it works from your current notebook.
 
 First save asks you to **Authorize googlecolab** — OAuth, nothing to store, and it may re-prompt
 later. If the notebook looks stale after the agent changed it, reopen the link or append
-`?flush_cache=true`. Tests are `pytest -q` from the repo root — no Drive, no network, no GPU, so
-the same command works in CI, a terminal, or a cell.
+`?flush_cache=true`. Tests are `pytest -q` from the repo root — in Colab that is the clone at
+`REPO_DIR`, not the runtime's working directory. No Drive, no network, no GPU, so the same
+command works in CI, a terminal, or a cell.
 
 Working with an agent here: `AGENTS.md` is both the contract and the entry point — it names what
 to read, in what order, and how a session runs. Most agents pick it up unprompted. One that

@@ -90,8 +90,10 @@ item instead of asserting it now.
 ## Step 3 — Environment and paths
 
 > Three quick ones:
-> - **Drive folder** for this project's data and outputs — `MyDrive/<name>`. I'll default to
->   `<repo name>` if you don't mind.
+> - **Drive folder** for this project's data and outputs. Default `MyDrive/projects/<repo name>`
+>   — the shared `projects/` parent means MyDrive's root gains one folder however many projects
+>   you start, instead of one per project. `MyDrive/<repo name>` is a click shallower if you
+>   prefer; deeper than two levels buys nothing.
 > - **Where does the input come from?** A file you'll drop in Drive, a download, an API, or
 >   nothing yet.
 > - **Any credentials needed?** An API key or token — name it, don't paste it. It goes in Colab

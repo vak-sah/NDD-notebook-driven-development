@@ -42,6 +42,10 @@ later. If the notebook looks stale after the agent changed it, reopen the link o
 `?flush_cache=true`. Tests are `pytest -q` from the repo root — no Drive, no network, no GPU, so
 the same command works in CI, a terminal, or a cell.
 
+Working with an agent here: `AGENTS.md` is both the contract and the entry point — it names what
+to read, in what order, and how a session runs. Most agents pick it up unprompted. One that
+doesn't needs a single sentence: *read `AGENTS.md` and follow it*.
+
 ## Layout
 
 ```

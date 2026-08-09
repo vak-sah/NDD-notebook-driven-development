@@ -262,13 +262,12 @@ The user is an amateur in most fields and verifies slower than you produce. Opti
   open the notebook from it — useful occasionally, not the loop to design around.)
 - **Not everything is theirs to check.** Unit tests, lint and CI are yours — run them, report
   the result as one line under **Done**.
-- **Say when the unchecked pile grows.** A step lands in `STATE.md` §2 marked `(unchecked)` and
-  loses the mark when the user confirms its check passed (§10). Three or more consecutive
-  unchecked entries means this section's safety net has never been under load: no check has run,
-  so no revert has ever been triggered, and the steps are stacking on an unverified base. Say so
-  before taking the next item, and make the session's single **Verify** item a check that covers
-  the pile rather than the newest step alone. This surfaces the risk; it does not gate on it —
-  the user decides whether to spend the time.
+- **Say when the unchecked pile grows.** Three or more consecutive `(unchecked)` entries in
+  `STATE.md` §2 (§10 defines the mark) means this section's safety net has never been under load:
+  no check has run, so no revert has ever been triggered, and every step is stacking on an
+  unverified base. Say so before taking the next item, and make the session's single **Verify**
+  item cover the pile rather than the newest step alone. This surfaces the risk; it does not gate
+  on it — the user decides whether to spend the time.
 - **Verify** carries at most one item, and only if a human must judge it: behaviour, output
   quality, visuals, a design call. Otherwise write "Verify: nothing". If several steps landed in
   one session, still hand over one check — the one most likely to catch a problem — not one per

@@ -7,7 +7,7 @@ matches what's on disk. Those are cheap to introduce and annoying to find by rea
 This is deliberately small. It checks facts that are mechanically checkable and nothing about
 wording or content — style is a judgement call and does not belong in CI.
 
-To change what's enforced, edit the three tests below. To exempt a path from the layout check,
+To change what's enforced, edit the four tests below. To exempt a path from the layout check,
 add it to IGNORED.
 """
 
@@ -69,3 +69,28 @@ def test_readme_layout_matches_the_repo():
 
     assert not listed_but_absent, f"README Layout lists what isn't here: {sorted(listed_but_absent)}"
     assert not present_but_unlisted, f"in the repo but missing from README Layout: {sorted(present_but_unlisted)}"
+
+
+def test_pipeline_section_drops_the_stub_once_a_real_stage_exists():
+    """§ Pipeline may describe the stub only while the stub is all there is.
+
+    `AGENTS.md` §6 puts the README pipeline line in the extraction checklist, but that is
+    judgement, and judgement is what slips on the tenth feature rather than the first. This is
+    the mechanical half: the moment `src/pipeline/` holds a real module, the placeholder text is
+    false by definition, so it cannot survive to the default branch.
+
+    Only the README claim is asserted. Whether `stub.py` itself is deleted in the same PR or the
+    next one is a judgement call, and a test that forced it would fire on a legitimate
+    intermediate commit.
+    """
+    modules = {p.stem for p in (REPO / "src" / "pipeline").glob("*.py")} - {"__init__"}
+    if modules <= {"stub"}:
+        return
+
+    readme = (REPO / "README.md").read_text()
+    section = re.search(r"^## Pipeline$(.*)", readme, re.S | re.M)
+    assert section, "README.md has no Pipeline section"
+    assert "stub" not in section.group(1), (
+        f"src/pipeline/ has real modules ({sorted(modules - {'stub'})}), but README's Pipeline "
+        "section still describes the stub — replace it with one line per real stage"
+    )

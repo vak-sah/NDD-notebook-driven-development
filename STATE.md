@@ -14,6 +14,8 @@ References:
 
 ## 2. Done
 <!-- EVERY merged step, oldest first, numbered, one line each. complete but brief.
+     a step lands as `(unchecked)`; the mark clears when the user confirms its check passed, so
+     merged and known-to-work stay distinguishable.
      scan this to spot anything missed. detail lives in git log. -->
 1. _nothing yet_
 

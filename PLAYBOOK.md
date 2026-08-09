@@ -18,9 +18,10 @@ If the user corrects the same thing twice, it belongs here.
 - _none yet_
 
 ## Reference notes
-<!-- what we take from each reference, and what we deliberately don't. written once, on first
-     read. if a reference could not actually be reached, say so here — never let notes written
-     from prior familiarity look like a live read. -->
+<!-- three things per reference: what we take, what we deliberately don't, and where we'd
+     plausibly diverge with the alternative named — a reference is evidence, not a spec.
+     written once, on first read. if a reference could not actually be reached, say so here —
+     never let notes written from prior familiarity look like a live read. -->
 - _none yet_
 
 ## Conventions

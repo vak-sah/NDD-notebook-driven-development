@@ -193,8 +193,15 @@ while it's still being figured out; that hides it from the person who has to ver
 **Extract once it's solid** — it works, the user has verified it, and the shape has stopped
 changing. Extraction is its own PR with **no behaviour change**: the code moves into
 `src/pipeline/`, the notebook keeps the knobs, the call, and the visual output. Extract when the
-feature is settled, when another part needs it, or when the cells have outgrown the workspace —
-not on a schedule.
+feature is settled, when another part needs it, when the cells have outgrown the workspace, or
+when the user asks — not on a schedule. A request to extract is an instruction, not a queue
+insertion; §3's queue rules do not apply to it.
+
+**When a feature settles and you don't extract it, put one line in `STATE.md` §5.** Those first
+three triggers are all judgement, and judgement under momentum reliably favours carrying on —
+which is how a notebook quietly becomes the whole product. The §5 line is what hands the call to
+the user instead: they read that section every session, and it costs a line rather than a
+report. Delete it when the feature is extracted.
 
 An extracted feature has:
 1. A module under `src/pipeline/` with a docstring: purpose, inputs/outputs, safe knobs.

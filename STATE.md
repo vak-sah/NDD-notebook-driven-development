@@ -29,7 +29,8 @@ References:
 1. _your first feature — replace the stub's passthrough with a real stage_
 
 ## 5. Optional / later
-<!-- would step the project up, not blocking MVP -->
+<!-- would step the project up, not blocking MVP.
+     settled features still sitting in the notebook belong here too (AGENTS.md §6) -->
 - none
 
 ## 6. Parked / dropped

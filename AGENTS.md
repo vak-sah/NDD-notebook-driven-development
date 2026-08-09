@@ -43,9 +43,8 @@ contract, and it gets fixed once.
   "what is this, why, what do I change?" A correct repo the user can't reason about has failed.
 - We may follow **one or more references** (repos, sites, papers, products). A reference is
   evidence about what worked under someone else's constraints, not a specification. We replicate
-  them *our way*; ending up somewhere different is an acceptable outcome, not a failure. Where a
-  reference made a choice this project needn't copy, name the alternative so the user can re-make
-  it, rather than inheriting it silently.
+  them *our way*; ending up somewhere different is an acceptable outcome, not a failure. Name the
+  choices a reference made that this project needn't copy, so the user can re-make them.
 - **The repo is the memory.** A fresh agent reading `STATE.md` + `README.md` + `PLAYBOOK.md`
   (§2, in that order) must be able to continue correctly. Knowledge that exists only in chat is lost.
 
@@ -87,29 +86,24 @@ whether the next session would have to ask the same question again.
    still parse, does the module import, does the function return what you claim on one small
    input. The user's run should fail on a question of judgement, never on a typo you could have
    caught in seconds.
-5. **Land** — merge once CI is green, from a branch that is this step's alone. This comes
-   *before* verification on purpose: the user checks by running the notebook, which loads the
-   default branch, so a step has to land before it can be checked at all (§8). Never reuse a
-   merged branch: a squash merge leaves it holding commits the default branch no longer has, so
-   the next push to it is rejected and only a force-push clears it — which §3 says to ask about
-   and some environments refuse outright. A fresh branch costs nothing and avoids the class.
+5. **Land** — merge once CI is green, from a branch that is this step's alone and is never reused
+   after merge. This comes *before* verification on purpose: the user checks by running the
+   notebook, which loads the default branch, so a step has to land before it can be checked at
+   all (§8).
 6. **Verify** — hand over the one check that matters (§8). If it fails, the undo is a **revert
    PR**, not a fix stacked on top.
 7. **Update `STATE.md` when the project actually moved** — a step landed, was reverted, got
    parked, or the queue changed order. *Not* for a bugfix, a CI fix, a doc correction or a
    second attempt inside a step that's already listed; `git log` carries those, and `STATE.md`
    stays readable by leaving them out. If you're unsure an entry earns its place, it doesn't.
-   This governs the §2 Done chronology; §5 and §6 are standing lists, written whenever their
-   own rule says so (§6, §10).
    `README.md` only when the layout or pipeline actually changed — during exploration that
    normally means at extraction (§6), not every step.
 
 **Then keep going.** Take the next queue item rather than stopping to check in — unless the next
 item depends on a judgement only the user can make about an earlier one (output quality, a
-visual, a design call), or §3 says ask. Building on unverified *mechanics* inside one session is
-fine: the session reverts as one lump. Building on an unverified *design call* is not — that
-compounds, and one bad judgement becomes three. One session landing three items and handing over
-one good check beats three sessions landing one each.
+visual, a design call), or §3 says ask. Unverified *mechanics* are fine to build on inside one
+session, which reverts as one lump; an unverified *design call* is not. One session landing three
+items and handing over one good check beats three sessions landing one each.
 
 One feature at a time *within* a step. Finish it, or park it explicitly in `STATE.md`.
 
@@ -156,12 +150,10 @@ authorization. Don't re-confirm, don't restate the plan back.
 - **Feature docs live in the code** — module or function docstring: what it does,
   inputs/outputs, what to change to modify it safely. No parallel doc file to drift.
   When they're written: §6.
-- **A coined name carries its meaning where it's defined.** Any term you introduce — a metric, a
-  field, a mode, a threshold — is jargon to a user who is an amateur in the domain (§8), and to
-  the same user six months on. Beside the definition, say what it measures and what a good value
-  looks like. If the term reaches a printed report or a stored record, that one line goes into
-  the record too, so an output opened later explains itself without the code. The bullet above is
-  why this is never a glossary file.
+- **A coined name carries its meaning where it's defined** — a metric, a field, a mode. Beside
+  the definition, say what it measures and what a good value looks like: the user is an amateur
+  in the domain (§8), and so is the same user six months on. A term that reaches a report or a
+  stored record takes that line with it, so an output opened later explains itself without the code.
 - **Docs are updated when they become wrong, not on a schedule.** One job per file keeps those
   updates to a line or two. If keeping a doc current feels like busywork, the doc is wrong.
 
@@ -174,10 +166,7 @@ built (§6), calls into `src/` for what's settled, and visual output.
 
 - **Every knob lives in the notebook's config cell**, including ones that have settled into
   defaults. The command center is where the user sees and changes things; modules take values
-  as arguments rather than reading a config module behind the user's back. Naming does not decide
-  what counts: a threshold, a budget, a path, a mode — anything someone would plausibly want to
-  change is a knob whatever it is called, and belongs up there rather than inline in the cell
-  that consumes it.
+  as arguments rather than reading a config module behind the user's back.
 - **The config cell is self-contained.** Reading it alone should tell the user what they can
   change, what the alternatives are, and *why the current value won*. Record the variants
   considered — that's the part that gets forgotten. Group by the decision the user is making.
@@ -205,14 +194,7 @@ while it's still being figured out; that hides it from the person who has to ver
 changing. Extraction is its own PR with **no behaviour change**: the code moves into
 `src/pipeline/`, the notebook keeps the knobs, the call, and the visual output. Extract when the
 feature is settled, when another part needs it, when the cells have outgrown the workspace, or
-when the user asks — not on a schedule. A request to extract is an instruction, not a queue
-insertion; §3's queue rules do not apply to it.
-
-**When a feature settles and you don't extract it, put one line in `STATE.md` §5.** Those first
-three triggers are all judgement, and judgement under momentum reliably favours carrying on —
-which is how a notebook quietly becomes the whole product. The §5 line is what hands the call to
-the user instead: they read that section every session, and it costs a line rather than a
-report. Delete it when the feature is extracted.
+when the user asks — not on a schedule.
 
 An extracted feature has:
 1. A module under `src/pipeline/` with a docstring: purpose, inputs/outputs, safe knobs.
@@ -230,8 +212,7 @@ busywork §4 forbids.
 Two things never wait:
 - **Docstrings.** Every function — and every notebook cell that does more than one thing —
   carries one from the moment it's written, so the user can read the cell and check it does what
-  it claims. They travel with the code on extraction. They're a paragraph, not a chore, and
-  `tests/test_notebook.py` holds the cell half of this to the floor.
+  it claims. They travel with the code on extraction. They're a paragraph, not a chore.
 - **`STATE.md`.** Current as of the last step that landed, exploration or not. While `README.md`
   lags reality between exploration and extraction, `STATE.md` is what keeps the user oriented.
   Steps, not attempts — the cadence is §2.7.
@@ -242,28 +223,23 @@ else, that's an entanglement bug — fix the seam.
 
 ---
 
-## 7. Environment — Colab first, one root outside git
+## 7. Environment — Colab + Google Drive
 
-The default assumption is **Google Colab** with **Google Drive** mounted, and the template ships
-that way. A project may also run locally, or in both places. That is a config-cell value, not an
-amendment to this section — everything below holds either way, and only where the root sits
-differs.
+The user runs, edits and tests in **Google Colab** with **Google Drive** mounted. Assume that,
+not a local machine.
 
 - **Only code, config and docs go in git.** Data, weights, caches, outputs and credentials live
-  under the root and are `.gitignore`d. Path *strings* are fine to commit — it's the files that
-  stay out.
-- **One root**, set in the notebook config cell and nowhere else — not in `PLAYBOOK.md`, not in
-  a module. `DRIVE_ROOT` on the default Colab setup; a project that runs in more than one place
-  resolves it in that same cell, under whatever name fits. One place to change means nothing to
-  keep in sync.
+  in Drive and are `.gitignore`d. Path *strings* are fine to commit — it's the files that stay out.
+- **One Drive root**, set in the notebook config cell and nowhere else — not in `PLAYBOOK.md`,
+  not in a module. One place to change means nothing to keep in sync.
 - **Secrets never touch the repo** and are never printed in a cell. Colab Secrets, or a file at
-  the agreed path under the root.
+  the agreed Drive path.
 - **Manual setup is one-time and explicit.** If the user must place a file by hand, give exact
   path, filename and format once, then record it in `PLAYBOOK.md` so it's never asked again.
-- Setup is repeatable from a fresh runtime: reach the root → install → configure → run.
-- **Tests run without the root, network or a GPU** — CI has none of them. Anything needing real
+- Setup is repeatable from a fresh runtime: mount Drive → install → configure → run.
+- **Tests run without Drive, network or a GPU** — CI has none of them. Anything needing real
   data takes a path argument and gets a small fixture or a temp dir in tests. If a feature can't
-  be tested without the root, that's a seam problem: the I/O and the logic aren't separated.
+  be tested without Drive, that's a seam problem: the I/O and the logic aren't separated.
 
 ---
 
@@ -285,12 +261,6 @@ The user is an amateur in most fields and verifies slower than you produce. Opti
   open the notebook from it — useful occasionally, not the loop to design around.)
 - **Not everything is theirs to check.** Unit tests, lint and CI are yours — run them, report
   the result as one line under **Done**.
-- **Say when the unchecked pile grows.** Three or more consecutive `(unchecked)` entries in
-  `STATE.md` §2 (§10 defines the mark) means this section's safety net has never been under load:
-  no check has run, so no revert has ever been triggered, and every step is stacking on an
-  unverified base. Say so before taking the next item, and make the session's single **Verify**
-  item cover the pile rather than the newest step alone. This surfaces the risk; it does not gate
-  on it — the user decides whether to spend the time.
 - **Verify** carries at most one item, and only if a human must judge it: behaviour, output
   quality, visuals, a design call. Otherwise write "Verify: nothing". If several steps landed in
   one session, still hand over one check — the one most likely to catch a problem — not one per

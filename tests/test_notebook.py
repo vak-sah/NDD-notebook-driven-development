@@ -62,8 +62,8 @@ def test_every_knob_lives_in_one_cell():
     cell, which meant two places to look for the values that change how a run behaves.
 
     Scope: this matches ALL-CAPS declarations, which is the convention rather than the
-    definition. What counts as a knob is `AGENTS.md` §5, and a lowercase name does not exempt
-    one — tightening the pattern further would fire on every ordinary local in every cell.
+    definition — `AGENTS.md` §5 is. Tightening the pattern further would fire on every ordinary
+    local in every cell.
     """
     declaring = {
         i: names

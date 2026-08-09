@@ -96,6 +96,8 @@ whether the next session would have to ask the same question again.
    parked, or the queue changed order. *Not* for a bugfix, a CI fix, a doc correction or a
    second attempt inside a step that's already listed; `git log` carries those, and `STATE.md`
    stays readable by leaving them out. If you're unsure an entry earns its place, it doesn't.
+   This governs the §2 Done chronology; §5 and §6 are standing lists, written whenever their
+   own rule says so (§6, §10).
    `README.md` only when the layout or pipeline actually changed — during exploration that
    normally means at extraction (§6), not every step.
 

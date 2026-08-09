@@ -60,6 +60,10 @@ def test_every_knob_lives_in_one_cell():
 
     This rule has been broken before, silently: REPO_URL and PACKAGES were declared in the setup
     cell, which meant two places to look for the values that change how a run behaves.
+
+    Scope: this matches ALL-CAPS declarations, which is the convention rather than the
+    definition. What counts as a knob is `AGENTS.md` §5, and a lowercase name does not exempt
+    one — tightening the pattern further would fire on every ordinary local in every cell.
     """
     declaring = {
         i: names
@@ -70,6 +74,28 @@ def test_every_knob_lives_in_one_cell():
         "knobs must be declared in exactly one cell (the config cell), but top-level constants "
         f"appear in {len(declaring)}: { {i: n for i, n in declaring.items()} }"
     )
+
+
+def test_working_cells_say_what_they_do():
+    """`AGENTS.md` §6: a cell that does more than one thing carries a docstring, from the start.
+
+    Docstrings decay late rather than early — the first features get them and the tenth does
+    not, by which point the notebook is the only place the work is described. The threshold is
+    the cell's own structure, not a line count: a single-statement cell is self-evident, and
+    anything sequencing two or more statements is doing something a reader has to reconstruct.
+    """
+    for i, cell in enumerate(cells("code")):
+        cleaned = "\n".join(
+            "" if line.lstrip().startswith(("!", "%")) else line
+            for line in source(cell).split("\n")
+        )
+        body = ast.parse(cleaned).body
+        if len(body) < 2:
+            continue
+        assert ast.get_docstring(ast.Module(body=body, type_ignores=[])), (
+            f"cell {i} runs {len(body)} statements with no opening docstring — say what it does "
+            "and what the user should see"
+        )
 
 
 def test_no_tests_in_notebook_cells():

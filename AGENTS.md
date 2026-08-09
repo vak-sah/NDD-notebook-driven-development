@@ -41,8 +41,11 @@ contract, and it gets fixed once.
   the workspace. Features are built there and extracted to `src/` once settled (§6).
 - **The repo exists so the user can understand and build the MVP.** Every file answers
   "what is this, why, what do I change?" A correct repo the user can't reason about has failed.
-- We may follow **one or more references** (repos, sites, papers, products). We replicate them
-  *our way*; ending up somewhere different is an acceptable outcome, not a failure.
+- We may follow **one or more references** (repos, sites, papers, products). A reference is
+  evidence about what worked under someone else's constraints, not a specification. We replicate
+  them *our way*; ending up somewhere different is an acceptable outcome, not a failure. Where a
+  reference made a choice this project needn't copy, name the alternative so the user can re-make
+  it, rather than inheriting it silently.
 - **The repo is the memory.** A fresh agent reading `STATE.md` + `README.md` + `PLAYBOOK.md`
   (§2, in that order) must be able to continue correctly. Knowledge that exists only in chat is lost.
 
@@ -93,12 +96,17 @@ whether the next session would have to ask the same question again.
    parked, or the queue changed order. *Not* for a bugfix, a CI fix, a doc correction or a
    second attempt inside a step that's already listed; `git log` carries those, and `STATE.md`
    stays readable by leaving them out. If you're unsure an entry earns its place, it doesn't.
+   This governs the §2 Done chronology; §5 and §6 are standing lists, written whenever their
+   own rule says so (§6, §10).
    `README.md` only when the layout or pipeline actually changed — during exploration that
    normally means at extraction (§6), not every step.
 
-**Then keep going.** Take the next queue item rather than stopping to check in — unless it
-builds on something the user hasn't verified yet, or §3 says ask. One session landing three
-items and handing over one good check beats three sessions landing one each.
+**Then keep going.** Take the next queue item rather than stopping to check in — unless the next
+item depends on a judgement only the user can make about an earlier one (output quality, a
+visual, a design call), or §3 says ask. Building on unverified *mechanics* inside one session is
+fine: the session reverts as one lump. Building on an unverified *design call* is not — that
+compounds, and one bad judgement becomes three. One session landing three items and handing over
+one good check beats three sessions landing one each.
 
 One feature at a time *within* a step. Finish it, or park it explicitly in `STATE.md`.
 
@@ -157,7 +165,10 @@ built (§6), calls into `src/` for what's settled, and visual output.
 
 - **Every knob lives in the notebook's config cell**, including ones that have settled into
   defaults. The command center is where the user sees and changes things; modules take values
-  as arguments rather than reading a config module behind the user's back.
+  as arguments rather than reading a config module behind the user's back. Naming does not decide
+  what counts: a threshold, a budget, a path, a mode — anything someone would plausibly want to
+  change is a knob whatever it is called, and belongs up there rather than inline in the cell
+  that consumes it.
 - **The config cell is self-contained.** Reading it alone should tell the user what they can
   change, what the alternatives are, and *why the current value won*. Record the variants
   considered — that's the part that gets forgotten. Group by the decision the user is making.
@@ -184,8 +195,15 @@ while it's still being figured out; that hides it from the person who has to ver
 **Extract once it's solid** — it works, the user has verified it, and the shape has stopped
 changing. Extraction is its own PR with **no behaviour change**: the code moves into
 `src/pipeline/`, the notebook keeps the knobs, the call, and the visual output. Extract when the
-feature is settled, when another part needs it, or when the cells have outgrown the workspace —
-not on a schedule.
+feature is settled, when another part needs it, when the cells have outgrown the workspace, or
+when the user asks — not on a schedule. A request to extract is an instruction, not a queue
+insertion; §3's queue rules do not apply to it.
+
+**When a feature settles and you don't extract it, put one line in `STATE.md` §5.** Those first
+three triggers are all judgement, and judgement under momentum reliably favours carrying on —
+which is how a notebook quietly becomes the whole product. The §5 line is what hands the call to
+the user instead: they read that section every session, and it costs a line rather than a
+report. Delete it when the feature is extracted.
 
 An extracted feature has:
 1. A module under `src/pipeline/` with a docstring: purpose, inputs/outputs, safe knobs.
@@ -201,9 +219,10 @@ stopped moving — rewriting a test against a signature that changes next iterat
 busywork §4 forbids.
 
 Two things never wait:
-- **Docstrings.** Every function carries one from the moment it's written, in the notebook cell,
-  so the user can read the cell and check it does what it claims. They travel with the code on
-  extraction. They're a paragraph, not a chore.
+- **Docstrings.** Every function — and every notebook cell that does more than one thing —
+  carries one from the moment it's written, so the user can read the cell and check it does what
+  it claims. They travel with the code on extraction. They're a paragraph, not a chore, and
+  `tests/test_notebook.py` holds the cell half of this to the floor.
 - **`STATE.md`.** Current as of the last step that landed, exploration or not. While `README.md`
   lags reality between exploration and extraction, `STATE.md` is what keeps the user oriented.
   Steps, not attempts — the cadence is §2.7.
@@ -252,6 +271,12 @@ The user is an amateur in most fields and verifies slower than you produce. Opti
   open the notebook from it — useful occasionally, not the loop to design around.)
 - **Not everything is theirs to check.** Unit tests, lint and CI are yours — run them, report
   the result as one line under **Done**.
+- **Say when the unchecked pile grows.** Three or more consecutive `(unchecked)` entries in
+  `STATE.md` §2 (§10 defines the mark) means this section's safety net has never been under load:
+  no check has run, so no revert has ever been triggered, and every step is stacking on an
+  unverified base. Say so before taking the next item, and make the session's single **Verify**
+  item cover the pile rather than the newest step alone. This surfaces the risk; it does not gate
+  on it — the user decides whether to spend the time.
 - **Verify** carries at most one item, and only if a human must judge it: behaviour, output
   quality, visuals, a design call. Otherwise write "Verify: nothing". If several steps landed in
   one session, still hand over one check — the one most likely to catch a problem — not one per
@@ -284,8 +309,10 @@ say so in a word and move on.
 
 `STATE.md` always contains, in this order:
 1. **Goal** — one paragraph: what MVP means here, plus references (zero, one, or several).
-2. **Done** — every merged step, oldest first, numbered, one line each. Complete enough to scan
-   for anything missed, brief enough to stay readable. Detail is in `git log`.
+2. **Done** — every merged step, oldest first, numbered, one line each. Each lands marked
+   `(unchecked)` and loses the mark once the user confirms its check passed, so the file
+   distinguishes *merged* from *known to work* (§8). Complete enough to scan for anything missed,
+   brief enough to stay readable. Detail is in `git log`.
 3. **In progress** — at most one. Branch + where it stopped.
 4. **Next** — ordered queue to MVP, one line each.
 5. **Optional / later** — would step the project up, not blocking MVP.

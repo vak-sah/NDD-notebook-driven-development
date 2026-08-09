@@ -76,10 +76,16 @@ build a queue on a premise you already doubt. The user decides with the problem 
 > Are there repos, papers, sites or products you want this to follow? Links, and roughly what
 > to take from each. "None" is fine.
 
-Zero, one or several. For each one given: read it **once**, now, and write what you're taking
-into `PLAYBOOK.md` § *Reference notes* — the specific ideas, structures or approaches, and what
-you're deliberately *not* taking. Those notes are the point; re-reading a big reference every
-session is a tax the repo exists to avoid.
+Zero, one or several. For each one given: read it **once**, now, and write three things into
+`PLAYBOOK.md` § *Reference notes* — what you're taking, what you're deliberately *not* taking,
+and **where this project would plausibly diverge, with the alternative named**. Those notes are
+the point; re-reading a big reference every session is a tax the repo exists to avoid.
+
+The third element is what keeps a reference useful. It made its choices under its own
+constraints, and notes that only record compliance turn it into a specification, which it isn't
+(`AGENTS.md` §1). Name the choices that are the user's to re-make, so they can change direction
+knowing what they're trading — and don't let the reference's own pipeline become the queue in
+Step 5 by default.
 
 **If you can't actually reach it** — no network, blocked domain, paywall — you may still write
 what you know, but label it in `PLAYBOOK.md` as written from prior familiarity rather than a
@@ -90,8 +96,10 @@ item instead of asserting it now.
 ## Step 3 — Environment and paths
 
 > Three quick ones:
-> - **Drive folder** for this project's data and outputs — `MyDrive/<name>`. I'll default to
->   `<repo name>` if you don't mind.
+> - **Drive folder** for this project's data and outputs. Default `MyDrive/projects/<repo name>`
+>   — the shared `projects/` parent means MyDrive's root gains one folder however many projects
+>   you start, instead of one per project. `MyDrive/<repo name>` is a click shallower if you
+>   prefer; deeper than two levels buys nothing.
 > - **Where does the input come from?** A file you'll drop in Drive, a download, an API, or
 >   nothing yet.
 > - **Any credentials needed?** An API key or token — name it, don't paste it. It goes in Colab

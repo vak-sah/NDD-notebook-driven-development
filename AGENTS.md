@@ -87,9 +87,12 @@ whether the next session would have to ask the same question again.
    still parse, does the module import, does the function return what you claim on one small
    input. The user's run should fail on a question of judgement, never on a typo you could have
    caught in seconds.
-5. **Land** — merge once CI is green. This comes *before* verification on purpose: the user
-   checks by running the notebook, which loads the default branch, so a step has to land before
-   it can be checked at all (§8).
+5. **Land** — merge once CI is green, from a branch that is this step's alone. This comes
+   *before* verification on purpose: the user checks by running the notebook, which loads the
+   default branch, so a step has to land before it can be checked at all (§8). Never reuse a
+   merged branch: a squash merge leaves it holding commits the default branch no longer has, so
+   the next push to it is rejected and only a force-push clears it — which §3 says to ask about
+   and some environments refuse outright. A fresh branch costs nothing and avoids the class.
 6. **Verify** — hand over the one check that matters (§8). If it fails, the undo is a **revert
    PR**, not a fix stacked on top.
 7. **Update `STATE.md` when the project actually moved** — a step landed, was reverted, got
@@ -239,23 +242,28 @@ else, that's an entanglement bug — fix the seam.
 
 ---
 
-## 7. Environment — Colab + Google Drive
+## 7. Environment — Colab first, one root outside git
 
-The user runs, edits and tests in **Google Colab** with **Google Drive** mounted. Assume that,
-not a local machine.
+The default assumption is **Google Colab** with **Google Drive** mounted, and the template ships
+that way. A project may also run locally, or in both places. That is a config-cell value, not an
+amendment to this section — everything below holds either way, and only where the root sits
+differs.
 
 - **Only code, config and docs go in git.** Data, weights, caches, outputs and credentials live
-  in Drive and are `.gitignore`d. Path *strings* are fine to commit — it's the files that stay out.
-- **One Drive root**, set in the notebook config cell and nowhere else — not in `PLAYBOOK.md`,
-  not in a module. One place to change means nothing to keep in sync.
+  under the root and are `.gitignore`d. Path *strings* are fine to commit — it's the files that
+  stay out.
+- **One root**, set in the notebook config cell and nowhere else — not in `PLAYBOOK.md`, not in
+  a module. `DRIVE_ROOT` on the default Colab setup; a project that runs in more than one place
+  resolves it in that same cell, under whatever name fits. One place to change means nothing to
+  keep in sync.
 - **Secrets never touch the repo** and are never printed in a cell. Colab Secrets, or a file at
-  the agreed Drive path.
+  the agreed path under the root.
 - **Manual setup is one-time and explicit.** If the user must place a file by hand, give exact
   path, filename and format once, then record it in `PLAYBOOK.md` so it's never asked again.
-- Setup is repeatable from a fresh runtime: mount Drive → install → configure → run.
-- **Tests run without Drive, network or a GPU** — CI has none of them. Anything needing real
+- Setup is repeatable from a fresh runtime: reach the root → install → configure → run.
+- **Tests run without the root, network or a GPU** — CI has none of them. Anything needing real
   data takes a path argument and gets a small fixture or a temp dir in tests. If a feature can't
-  be tested without Drive, that's a seam problem: the I/O and the logic aren't separated.
+  be tested without the root, that's a seam problem: the I/O and the logic aren't separated.
 
 ---
 
